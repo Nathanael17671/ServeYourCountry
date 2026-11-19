@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcdff81e12c98349b522b8d86a2a20f, type: 3}
+  m_Name: _Item Database SO
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDatabaseSO
+  items:
+  - Name: Plate
+    itemID: 2
+    Prefab: {fileID: 3941924154638449452, guid: bcf8a54516b4412418511d731c1e0318, type: 3}
+    IsAPlate: 1
+    canBePlated: 0
+    canBeCooked: 0
+    cookData:
+      cooktime: 5
+      cookResult: 1
+    canBeChopped: 1
+    chopData:
+      choptime: 5
+      chopResult: 4
+    canBeCombined: 0
+    combineData: []
+  - Name: Burnt
+    itemID: 1
+    Prefab: {fileID: 3414891189287419699, guid: 8015c155a994c5e4c81ee1f86efd1d5e, type: 3}
+    IsAPlate: 0
+    canBePlated: 0
+    canBeCooked: 0
+    cookData:
+      cooktime: 5
+      cookResult: 1
+    canBeChopped: 0
+    chopData:
+      choptime: 0
+      chopResult: 5
+    canBeCombined: 0
+    combineData: []
+  - Name: Wheat
+    itemID: 3
+    Prefab: {fileID: 3414891189287419699, guid: 94a47590c0826ea4394727737f3a771f, type: 3}
+    IsAPlate: 0
+    canBePlated: 0
+    canBeCooked: 1
+    cookData:
+      cooktime: 5
+      cookResult: 4
+    canBeChopped: 0
+    chopData:
+      choptime: 0
+      chopResult: 0
+    canBeCombined: 1
+    combineData:
+    - combineItem: 1
+      combineResult: 6
+  - Name: Bread
+    itemID: 4
+    Prefab: {fileID: 3414891189287419699, guid: 6123ea5929228484880f3fcdea064ab0, type: 3}
+    IsAPlate: 0
+    canBePlated: 0
+    canBeCooked: 1
+    cookData:
+      cooktime: 5
+      cookResult: 1
+    canBeChopped: 1
+    chopData:
+      choptime: 3
+      chopResult: 5
+    canBeCombined: 0
+    combineData: []
+  - Name: Toast
+    itemID: 5
+    Prefab: {fileID: 3414891189287419699, guid: a105f8eb883cb564b999f3076aacc570, type: 3}
+    IsAPlate: 0
+    canBePlated: 1
+    canBeCooked: 0
+    cookData:
+      cooktime: 5
+      cookResult: 1
+    canBeChopped: 0
+    chopData:
+      choptime: 0
+      chopResult: 5
+    canBeCombined: 0
+    combineData: []
+  - Name: Burnt Wheat
+    itemID: 6
+    Prefab: {fileID: 3414891189287419699, guid: 1dc8cb875333d4243b193871088d204a, type: 3}
+    IsAPlate: 0
+    canBePlated: 1
+    canBeCooked: 0
+    cookData:
+      cooktime: 5
+      cookResult: 1
+    canBeChopped: 1
+    chopData:
+      choptime: 5
+      chopResult: 4
+    canBeCombined: 0
+    combineData: []
