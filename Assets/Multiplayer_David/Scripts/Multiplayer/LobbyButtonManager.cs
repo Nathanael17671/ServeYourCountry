@@ -12,9 +12,11 @@ public class LobbyButtonManager : MonoBehaviour
 
     [SerializeField] private TMP_InputField joinCodeInputField;
 
-    public void OnMainMenuPressed()
+    public async void OnReturnToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        await ServeYourCountryLobbyScript.Instance.LeaveLobby();
+
+        SceneManager.LoadScene("LobbyScene");
     }
 
     public void OnCreateLobby()

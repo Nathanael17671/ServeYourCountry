@@ -54,8 +54,7 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
     public async Task LeaveLobby()
     {
         // Stop networking first
-        if (NetworkManager.Singleton != null &&
-            NetworkManager.Singleton.IsListening)
+        if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsListening)
         {
             NetworkManager.Singleton.Shutdown();
         }
@@ -71,10 +70,7 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
                 }
                 else
                 {
-                    await LobbyService.Instance.RemovePlayerAsync(
-                        joinedLobby.Id,
-                        AuthenticationService.Instance.PlayerId
-                    );
+                    await LobbyService.Instance.RemovePlayerAsync(joinedLobby.Id, AuthenticationService.Instance.PlayerId);
                 }
             }
             catch (LobbyServiceException e)
@@ -162,8 +158,11 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
             joinedLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, 10, new CreateLobbyOptions
             {
                 IsPrivate = isPrivate,
-
             });
+            Debug.Log("Lobby created!");
+            Debug.Log("Is Private: " + joinedLobby.IsPrivate);
+            Debug.Log("Lobby Code: " + joinedLobby.LobbyCode);
+            Debug.Log("Lobby ID: " + joinedLobby.Id);
 
             Allocation allocation = await AllocateRelay();
 

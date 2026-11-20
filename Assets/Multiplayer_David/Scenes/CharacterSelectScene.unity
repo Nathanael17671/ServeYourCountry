@@ -1742,7 +1742,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1039186251}
         m_TargetAssemblyTypeName: LobbyButtonManager, Assembly-CSharp
-        m_MethodName: OnMainMenuPressed
+        m_MethodName: OnReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
