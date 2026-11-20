@@ -372,6 +372,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Movement
   moveSpeed: 6
   rotationSpeed: 1500
+  accelerationTime: 0.25
+  decelerationTime: 0.05
 --- !u!143 &3704488898507508379
 CharacterController:
   m_ObjectHideFlags: 0
