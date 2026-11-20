@@ -36,6 +36,7 @@ public class CharacterSelectReady : NetworkBehaviour
 
         if (allClientReady)
         {
+            ServeYourCountryLobbyScript.Instance.DeleteLobby();
             NetworkManager.Singleton.SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
         }
 

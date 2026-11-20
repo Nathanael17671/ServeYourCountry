@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -18,6 +20,13 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
     public static ServeYourCountryLobbyScript Instance { get; private set; }
     private Lobby joinedLobby;
     private float hearthbeathTimer;
+    private float listLobbiesTimer;
+
+    public event EventHandler<OnLobbyListChangedEventArgs> onLobbyListChanged;
+    public class OnLobbyListChangedEventArgs : EventArgs
+    {
+        public List<Lobby> lobbyList;
+    }
 
     private void Awake()
     {
@@ -34,7 +43,7 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
         {
             InitializationOptions initializationOptions = new InitializationOptions();
 
-            initializationOptions.SetProfile(Random.Range(0, 100000).ToString());
+            initializationOptions.SetProfile(UnityEngine.Random.Range(0, 100000).ToString());
 
             await UnityServices.InitializeAsync(initializationOptions);
 
@@ -49,6 +58,23 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
     private void Update()
     {
         HandleHearthbeat();
+        HandlePeriodicListLobbies();
+    }
+
+    private void HandlePeriodicListLobbies()
+    {
+        if (joinedLobby == null && AuthenticationService.Instance.IsSignedIn)
+        {
+            listLobbiesTimer -= Time.deltaTime;
+
+            if (listLobbiesTimer <= 0f)
+            {
+                float listLobbiesTimerMax = 2f;
+
+                listLobbiesTimer = listLobbiesTimerMax;
+                ListLobbies();
+            }
+        }
     }
 
     public async Task LeaveLobby()
@@ -102,6 +128,30 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
     private bool IsLobbyHost()
     {
         return joinedLobby != null && joinedLobby.HostId == AuthenticationService.Instance.PlayerId;
+    }
+
+    private async void ListLobbies()
+    {
+        try
+        {
+            QueryLobbiesOptions queryLobbiesOptions = new QueryLobbiesOptions
+            {
+                Filters = new List<QueryFilter>
+            {
+                new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "0", QueryFilter.OpOptions.GT)
+            }
+            };
+            QueryResponse queryResponse = await LobbyService.Instance.QueryLobbiesAsync(queryLobbiesOptions);
+
+            onLobbyListChanged?.Invoke(this, new OnLobbyListChangedEventArgs
+            {
+                lobbyList = queryResponse.Results
+            });
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
     }
 
     private async Task<Allocation> AllocateRelay()
@@ -208,6 +258,25 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
         }
     }
 
+    public async void JoinWithLobbyId(string lobbyId)
+    {
+        try
+        {
+            joinedLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId);
+
+            string relayJoinCode = joinedLobby.Data[KEY_RELAY_JOIN_CODE].Value;
+
+            JoinAllocation joinAllocation = await JoinRelay(relayJoinCode);
+            NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(AllocationUtils.ToRelayServerData(joinAllocation, "dtls"));
+
+            NetworkManager.Singleton.StartClient();
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
+    }
+
     public async void JoinWithCode(string lobbyCode)
     {
         try
@@ -224,6 +293,23 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
+        }
+    }
+
+    public async void DeleteLobby()
+    {
+        if (joinedLobby != null)
+        {
+            try
+            {
+                await LobbyService.Instance.DeleteLobbyAsync(joinedLobby.Id);
+
+                joinedLobby = null;
+            }
+            catch (LobbyServiceException e)
+            {
+                Debug.Log(e);
+            }
         }
     }
 
