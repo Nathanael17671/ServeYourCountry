@@ -8,7 +8,7 @@ public class GameManager : NetworkBehaviour
 {
     [SerializeField] private Transform playerPrefab;
 
-    void Update()
+    public override void OnNetworkSpawn()
     {
         if (IsServer)
         {
@@ -16,13 +16,25 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-
-
-    private void CheckAllReady(string sceneName, LoadSceneMode loadSceneMode, List<ulong> ClinetsCompleted, List<ulong> ClientsDisconnected)
+    public override void OnNetworkDespawn()
     {
+        if (IsServer)
+        {
+            NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= CheckAllReady;
+        }
+    }
+
+    private void CheckAllReady(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsDisconnected)
+    {
+        if (!IsServer) return;
+
         foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
         {
+            if (NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject != null)
+                continue;
+
             Transform playerTransform = Instantiate(playerPrefab);
+
             playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
         }
     }
