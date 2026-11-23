@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcdff81e12c98349b522b8d86a2a20f, type: 3}
+  m_Name: _TEST Item Database SO
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDatabaseSO
+  items:
+  - Name: Plate
+    itemID: 1
+    Prefab: {fileID: 3941924154638449452, guid: bcf8a54516b4412418511d731c1e0318, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 0
+      toggleActivationTable: 0
+      alwaysActiveTable: 0
+      deliveryTable: 1
+    IsAPlate: 1
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Burnt
+    itemID: 2
+    Prefab: {fileID: 3414891189287419699, guid: 8015c155a994c5e4c81ee1f86efd1d5e, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 0
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Wheat
+    itemID: 3
+    Prefab: {fileID: 3414891189287419699, guid: 94a47590c0826ea4394727737f3a771f, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 5
+      result: 4
+    usedInPlayerInteractionTable: 1
+    playerInteractionData:
+      time: 5
+      result: 0
+    usedInToggleActivationTable: 1
+    toggleActivationData:
+      time: 5
+      result: 4
+    canBeCombined: 1
+    combineData:
+    - item: 1
+      result: 6
+  - Name: Bread
+    itemID: 4
+    Prefab: {fileID: 3414891189287419699, guid: 6123ea5929228484880f3fcdea064ab0, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 5
+      result: 0
+    usedInPlayerInteractionTable: 1
+    playerInteractionData:
+      time: 4
+      result: 7
+    usedInToggleActivationTable: 1
+    toggleActivationData:
+      time: 3
+      result: 1
+    canBeCombined: 0
+    combineData: []
+  - Name: Toast
+    itemID: 5
+    Prefab: {fileID: 3414891189287419699, guid: a105f8eb883cb564b999f3076aacc570, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 1
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Burnt Wheat
+    itemID: 6
+    Prefab: {fileID: 3414891189287419699, guid: 1dc8cb875333d4243b193871088d204a, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 0
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 1
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 1
+    playerInteractionData:
+      time: 5
+      result: 4
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Sliced Bread
+    itemID: 7
+    Prefab: {fileID: 3414891189287419699, guid: c60f87d90abae0d49b730b0689412a5c, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 1
+    alwaysActiveData:
+      time: 4
+      result: 5
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  orders:
+  - Name: Burnt Wheat with Toast
+    ingridients: 0500000006000000
