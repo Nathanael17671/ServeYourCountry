@@ -6,7 +6,7 @@ public class PlayerHandMultiplayer : NetworkBehaviour
     public GameObject heldItem;
     public GameObject itemHoldPoint;
     private Collider currentTableCollider;
-    private TableMultiplayerScript tableTypeMultiplayer;
+    private Table tableTypeMultiplayer;
     private Items heldItemScript;
 
     void OnTriggerEnter(Collider other)
@@ -14,8 +14,8 @@ public class PlayerHandMultiplayer : NetworkBehaviour
         if (other.gameObject.CompareTag("Table"))
         {
             currentTableCollider = other;
-            tableTypeMultiplayer = currentTableCollider.GetComponent<TableMultiplayerScript>();
-            other.GetComponent<TableMultiplayerScript>().SetIndicatorActive(true);
+            tableTypeMultiplayer = currentTableCollider.GetComponent<Table>();
+            other.GetComponent<Table>().SetIndicatorActive(true);
         }
     }
 
@@ -25,7 +25,7 @@ public class PlayerHandMultiplayer : NetworkBehaviour
         {
             currentTableCollider = null;
             tableTypeMultiplayer = null;
-            other.GetComponent<TableMultiplayerScript>().SetIndicatorActive(false);
+            other.GetComponent<Table>().SetIndicatorActive(false);
         }
     }
 
@@ -69,7 +69,7 @@ public class PlayerHandMultiplayer : NetworkBehaviour
             {
                 //Move item from table to hands
                 GameObject newHandItem = tableTypeMultiplayer.heldTableItem;
-                tableTypeMultiplayer.PickupServerRpc();
+                tableTypeMultiplayer.Pickup();
                 AddItemToHands(newHandItem);
             }
         }
@@ -88,7 +88,7 @@ public class PlayerHandMultiplayer : NetworkBehaviour
                     {
                         //Move item from table to hands
                         GameObject newHandItem = tableTypeMultiplayer.heldTableItem;
-                        tableTypeMultiplayer.PickupServerRpc();
+                        tableTypeMultiplayer.Pickup();
                         AddItemToHands(newHandItem);
                     }
                 }
