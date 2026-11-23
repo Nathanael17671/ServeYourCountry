@@ -4,13 +4,23 @@ using UnityEngine;
 
 public enum ItemID {
     None = 0,
-    Burnt = 1,
-    Plate = 2,
-    Wheat = 3,
-    Bread = 4,
-    Toast = 5,
-    BurntWheat = 6,
-    SlicedBread = 7
+    Plate = 1,
+    [System.Obsolete] T_Burnt = 2,
+    [System.Obsolete] T_Wheat = 3,
+    [System.Obsolete] T_Bread = 4,
+    [System.Obsolete] T_Toast = 5,
+    [System.Obsolete] T_BurntWheat = 6,
+    [System.Obsolete] T_SlicedBread = 7,
+    ContrabandPart1 = 8,
+    ContrabandPart2 = 9,
+    Contraband = 10,
+    Water = 11,
+    Flour = 12,
+    WetFlour = 13,
+    Dough = 14,
+    C_Dough = 15,
+    Bread = 16,
+    C_Bread = 17
 }
 
 [CreateAssetMenu]
