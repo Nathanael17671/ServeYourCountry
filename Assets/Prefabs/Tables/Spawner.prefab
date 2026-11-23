@@ -322,7 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
-  masterManager: {fileID: 0}
   itemHoldPoint: {fileID: 1681747402140272551}
   indicator: {fileID: 4144610486017717960}
   mainTableType: 1
