@@ -141,7 +141,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.95, z: 0}
-  m_LocalScale: {x: 1.25, y: 1, z: 1.25}
+  m_LocalScale: {x: 1.35, y: 1, z: 1.35}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7989351433802209282}
@@ -179,7 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
-  masterManager: {fileID: 0}
   itemHoldPoint: {fileID: 2155900453410368202}
   indicator: {fileID: 4543865581652703415}
   mainTableType: 6
@@ -195,7 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89fc48221b6751a42aefff44f191e48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DiningTable
-  orderManager: {fileID: 0}
   customerOrder: 
 --- !u!1 &1446688840209714051
 GameObject:

@@ -41,7 +41,7 @@ MonoBehaviour:
     combineData: []
   - Name: Flour
     itemID: 12
-    Prefab: {fileID: 3414891189287419699, guid: ddd13f612506eee4c86203066d30cdca, type: 3}
+    Prefab: {fileID: 3414891189287419699, guid: ee5cca2987421fd479891c067b0d303c, type: 3}
     placementData:
       normalTable: 1
       binTable: 1
@@ -63,8 +63,10 @@ MonoBehaviour:
     toggleActivationData:
       time: 0
       result: 0
-    canBeCombined: 0
-    combineData: []
+    canBeCombined: 1
+    combineData:
+    - item: 11
+      result: 13
   - Name: Water
     itemID: 11
     Prefab: {fileID: 3414891189287419699, guid: 1712880a3729af545a8cce008c358883, type: 3}
@@ -107,10 +109,10 @@ MonoBehaviour:
     alwaysActiveData:
       time: 0
       result: 0
-    usedInPlayerInteractionTable: 0
+    usedInPlayerInteractionTable: 1
     playerInteractionData:
-      time: 0
-      result: 0
+      time: 5
+      result: 14
     usedInToggleActivationTable: 0
     toggleActivationData:
       time: 0
@@ -142,7 +144,9 @@ MonoBehaviour:
       time: 0
       result: 0
     canBeCombined: 0
-    combineData: []
+    combineData:
+    - item: 9
+      result: 10
   - Name: Contraband Part 2
     itemID: 9
     Prefab: {fileID: 3414891189287419699, guid: 3cf40fe20ea077b4ba5bafaa2d9bbb5b, type: 3}
@@ -194,7 +198,9 @@ MonoBehaviour:
       time: 0
       result: 0
     canBeCombined: 0
-    combineData: []
+    combineData:
+    - item: 14
+      result: 15
   - Name: Dough
     itemID: 14
     Prefab: {fileID: 3414891189287419699, guid: 6cda9e287630add4d8ac4c3f460a34df, type: 3}
@@ -215,10 +221,10 @@ MonoBehaviour:
     playerInteractionData:
       time: 0
       result: 0
-    usedInToggleActivationTable: 0
+    usedInToggleActivationTable: 1
     toggleActivationData:
-      time: 0
-      result: 0
+      time: 10
+      result: 16
     canBeCombined: 0
     combineData: []
   - Name: C_Dough
@@ -241,10 +247,10 @@ MonoBehaviour:
     playerInteractionData:
       time: 0
       result: 0
-    usedInToggleActivationTable: 0
+    usedInToggleActivationTable: 1
     toggleActivationData:
-      time: 0
-      result: 0
+      time: 10
+      result: 17
     canBeCombined: 0
     combineData: []
   - Name: Bread
@@ -258,7 +264,7 @@ MonoBehaviour:
       alwaysActiveTable: 1
       deliveryTable: 1
     IsAPlate: 0
-    canBePlated: 0
+    canBePlated: 1
     usedInAlwaysActiveTable: 0
     alwaysActiveData:
       time: 0
@@ -274,8 +280,8 @@ MonoBehaviour:
     canBeCombined: 0
     combineData: []
   - Name: C_Bread
-    itemID: 16
-    Prefab: {fileID: 3414891189287419699, guid: 664392d57cab5a34bb0b06d936766012, type: 3}
+    itemID: 17
+    Prefab: {fileID: 3414891189287419699, guid: 515486c27a8af3e479b9973c1616e97d, type: 3}
     placementData:
       normalTable: 1
       binTable: 1
@@ -284,7 +290,7 @@ MonoBehaviour:
       alwaysActiveTable: 1
       deliveryTable: 1
     IsAPlate: 0
-    canBePlated: 0
+    canBePlated: 1
     usedInAlwaysActiveTable: 0
     alwaysActiveData:
       time: 0
@@ -299,4 +305,8 @@ MonoBehaviour:
       result: 0
     canBeCombined: 0
     combineData: []
-  orders: []
+  orders:
+  - Name: Normal Bread
+    ingridients: 10000000
+  - Name: Contraband Bread
+    ingridients: 11000000

@@ -30,7 +30,7 @@ public class Plate : MonoBehaviour
         return !itemTypeList.Contains(newItemID);
     }
 
-    bool IsEmpty()
+    public bool IsEmpty()
     {
         if (itemTypeList.Count == 0) 
             return true;

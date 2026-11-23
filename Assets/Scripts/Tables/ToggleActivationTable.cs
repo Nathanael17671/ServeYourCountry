@@ -36,13 +36,9 @@ public class ToggleActivationTable : MonoBehaviour
 
     void ProssesToggleOn()
     {
-        if (mainTableScript.heldTableItemScript.itemData.usedInToggleActivationTable)
-        {
-            tableActiveDisplay.SetActive(true);
-            tableInactiveDisplay.SetActive(false);
-            tableIsActive = true;
-            return;
-        }
+        tableActiveDisplay.SetActive(true);
+        tableInactiveDisplay.SetActive(false);
+        tableIsActive = true;
     }
 
 
@@ -56,6 +52,10 @@ public class ToggleActivationTable : MonoBehaviour
     void Update()
     {
         if (!tableIsActive)
+        {
+            return;
+        }
+        if (mainTableScript.heldTableItem == null)
         {
             return;
         }

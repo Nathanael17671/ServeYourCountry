@@ -71,10 +71,6 @@ public class TableValidityChecker : MonoBehaviour
                         return 4;
                     }
                 }
-                else
-                {
-                    return 0;
-                }
             } 
             else if (currentTableScript.heldTableItemScript.itemData.IsAPlate) //Is there a plate on table
             {
@@ -89,10 +85,6 @@ public class TableValidityChecker : MonoBehaviour
                     {
                         return 4;
                     }
-                }
-                else
-                {
-                    return 0;
                 }
             }
 
@@ -117,6 +109,14 @@ public class TableValidityChecker : MonoBehaviour
                     SpawnerTable spawnerTable = currentTableScript.GetComponent<SpawnerTable>();
                     if (handItemScript.itemID == spawnerTable.spawnItem)
                     {
+                        if (handItemScript.itemData.IsAPlate)
+                        {
+                            plate = handItemScript.plateScript;
+                            if (!plate.IsEmpty())
+                            {
+                                return 0;
+                            }
+                        }
                         Destroy(currentTableScript.heldTableItem);
                         currentTableScript.heldTableItem = null;
                         return 1;

@@ -175,10 +175,6 @@ public class MainTableScript : MonoBehaviour
 
     public void ToggleActivation()
     {
-        if (!HasItemOnTable())
-        {
-            return;
-        }
         if (mainTableType == TableType.ToggleActivation)
         {
             toggleActivationTableScript.ToggleProsses();
