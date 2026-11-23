@@ -29,6 +29,11 @@ public class ItemDatabaseSO : ScriptableObject
         }
         return _lookup.TryGetValue(id, out var data) ? data : null;
     }
+
+    internal ItemDataMultiplayer GetItem(ItemIDMultiplayer itemIDMultiplayer)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 [Serializable]
@@ -49,6 +54,8 @@ public class ItemData
     [Header("Combine")]
     public bool canBeCombined = false;
     public List<CombineData> combineData;
+
+    public ItemIDMultiplayer ItemIDMultiplayer { get; internal set; }
 }
 
 [Serializable]

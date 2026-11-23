@@ -6,7 +6,7 @@ public class PlayerHandMultiplayer : NetworkBehaviour
     public GameObject heldItem;
     public GameObject itemHoldPoint;
     private Collider currentTableCollider;
-    private Table tableScript;
+    private TableMultiplayerScript tableTypeMultiplayer;
     private Items heldItemScript;
 
     void OnTriggerEnter(Collider other)
@@ -14,8 +14,8 @@ public class PlayerHandMultiplayer : NetworkBehaviour
         if (other.gameObject.CompareTag("Table"))
         {
             currentTableCollider = other;
-            tableScript = currentTableCollider.GetComponent<Table>();
-            other.GetComponent<Table>().SetIndicatorActive(true);
+            tableTypeMultiplayer = currentTableCollider.GetComponent<TableMultiplayerScript>();
+            other.GetComponent<TableMultiplayerScript>().SetIndicatorActive(true);
         }
     }
 
@@ -24,8 +24,8 @@ public class PlayerHandMultiplayer : NetworkBehaviour
         if (other == currentTableCollider)
         {
             currentTableCollider = null;
-            tableScript = null;
-            other.GetComponent<Table>().SetIndicatorActive(false);
+            tableTypeMultiplayer = null;
+            other.GetComponent<TableMultiplayerScript>().SetIndicatorActive(false);
         }
     }
 
@@ -40,7 +40,7 @@ public class PlayerHandMultiplayer : NetworkBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Grab();
+                GrabServerRpc();
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
@@ -53,21 +53,23 @@ public class PlayerHandMultiplayer : NetworkBehaviour
         }
     }
 
-    void Grab()
+    [ServerRpc]
+    void GrabServerRpc()
     {
         //Check if table is on
-        if (tableScript.tableIsActive)
+        if (tableTypeMultiplayer.tableIsActive)
         {
             return;
         }
+
         //Check if hands are empty
         if (heldItem == null)
         {
-            if (tableScript.CanPickup())
+            if (tableTypeMultiplayer.CanPickup())
             {
                 //Move item from table to hands
-                GameObject newHandItem = tableScript.heldTableItem;
-                tableScript.Pickup();
+                GameObject newHandItem = tableTypeMultiplayer.heldTableItem;
+                tableTypeMultiplayer.PickupServerRpc();
                 AddItemToHands(newHandItem);
             }
         }
@@ -75,18 +77,18 @@ public class PlayerHandMultiplayer : NetworkBehaviour
         //Check if item in hands
         else if (heldItem != null)
         {
-            if (tableScript.CanPutDown(heldItem))
+            if (tableTypeMultiplayer.CanPutDown(heldItem))
             {
                 //Move item from hands to table
                 GameObject newTableItem = heldItem;
                 RemoveItemFromHands();
-                if (!tableScript.PutDownItem(newTableItem))
+                if (!tableTypeMultiplayer.PutDownItem(newTableItem))
                 {
-                    if (tableScript.CanPickup())
+                    if (tableTypeMultiplayer.CanPickup())
                     {
                         //Move item from table to hands
-                        GameObject newHandItem = tableScript.heldTableItem;
-                        tableScript.Pickup();
+                        GameObject newHandItem = tableTypeMultiplayer.heldTableItem;
+                        tableTypeMultiplayer.PickupServerRpc();
                         AddItemToHands(newHandItem);
                     }
                 }
@@ -113,11 +115,11 @@ public class PlayerHandMultiplayer : NetworkBehaviour
 
     void UsePress()
     {
-        tableScript.ProssesItemStart();
+        tableTypeMultiplayer.ProssesItemStart();
     }
 
     void UseHold()
     {
-        tableScript.ProssesItemProgress();
+        tableTypeMultiplayer.ProssesItemProgress();
     }
 }

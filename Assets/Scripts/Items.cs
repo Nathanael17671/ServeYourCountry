@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -127,5 +128,10 @@ public class Items : MonoBehaviour
     void ImportDatabaseInfo()
     {
         itemData = itemDatabaseSO.GetItem(itemID);
+    }
+
+    internal void UpdateProgressBar(TableTypeMultiplayer tableTypeMultiplayer)
+    {
+        throw new NotImplementedException();
     }
 }

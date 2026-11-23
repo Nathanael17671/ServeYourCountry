@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 // using Mono.Cecil.Cil;
 using Unity.VisualScripting;
+using System;
 
 public enum TableType
 {
@@ -378,5 +379,10 @@ public class Table : MonoBehaviour
             }
             return;
         }
+    }
+
+    public static implicit operator Table(TableMultiplayerScript v)
+    {
+        throw new NotImplementedException();
     }
 }
