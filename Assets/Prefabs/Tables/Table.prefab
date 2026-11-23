@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 404889618467797943}
   - component: {fileID: 7662139559170027325}
-  - component: {fileID: 2703242204784199410}
+  - component: {fileID: 7642985752473616574}
   m_Layer: 0
   m_Name: Table Script
   m_TagString: Table
@@ -54,7 +54,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2703242204784199410
+--- !u!114 &7642985752473616574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,16 +63,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1256563897002551635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f7130da6d5b854cb0330a6e301b2f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Table
+  m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
+  masterManager: {fileID: 0}
   itemHoldPoint: {fileID: 2155900453410368202}
   indicator: {fileID: 4543865581652703415}
-  itemDatabaseSO: {fileID: 11400000, guid: 114b33f466272204285b7dacf2b83800, type: 2}
-  tableType: 0
-  spawnItem: 0
-  progressCooldown: 0.25
-  heldItem: {fileID: 0}
+  mainTableType: 0
 --- !u!1 &1446688840209714051
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 263347097559674159}
   m_Layer: 0
-  m_Name: Object Point
+  m_Name: Item Hold Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,8 +241,8 @@ Transform:
   m_GameObject: {fileID: 2323992831522882559}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.42000002, z: 0}
-  m_LocalScale: {x: 1.25, y: 0.2, z: 1.25}
+  m_LocalPosition: {x: 0, y: 0, z: -0.15}
+  m_LocalScale: {x: 1.25, y: 0.8, z: 1.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3920632450449255695}
@@ -465,7 +462,7 @@ Transform:
   m_GameObject: {fileID: 5858653941460138188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
