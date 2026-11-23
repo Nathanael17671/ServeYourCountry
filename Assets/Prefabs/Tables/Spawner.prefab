@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4026698968836061907}
   m_Layer: 0
-  m_Name: Item Hold Point
+  m_Name: Object Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,8 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2112162626310358386}
   - component: {fileID: 6515590058719099852}
-  - component: {fileID: 2546010761789850233}
-  - component: {fileID: 4408844181721023240}
+  - component: {fileID: 5398940929559467601}
   m_Layer: 0
   m_Name: Table Script
   m_TagString: Table
@@ -310,7 +309,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2546010761789850233
+--- !u!114 &5398940929559467601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -319,26 +318,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6208397092666919966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
+  m_Script: {fileID: 11500000, guid: b0f7130da6d5b854cb0330a6e301b2f3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
-  masterManager: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::Table
   itemHoldPoint: {fileID: 1681747402140272551}
   indicator: {fileID: 4144610486017717960}
-  mainTableType: 1
---- !u!114 &4408844181721023240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6208397092666919966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bdec8ba43da0f844b9186ce9d1d7dfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnerTable
-  spawnItem: 0
+  itemDatabaseSO: {fileID: 11400000, guid: 114b33f466272204285b7dacf2b83800, type: 2}
+  tableType: 1
+  spawnItem: 3
+  progressCooldown: 0.25
+  heldItem: {fileID: 0}
 --- !u!1 &6533148905749233575
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +353,7 @@ Transform:
   m_GameObject: {fileID: 6533148905749233575}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: 1, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
