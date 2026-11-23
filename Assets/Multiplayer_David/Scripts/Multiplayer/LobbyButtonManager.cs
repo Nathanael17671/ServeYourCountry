@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class LobbyButtonManager : MonoBehaviour
 {
-    [SerializeField] private LobbyCreateui lobbyCreateui;
+    //[SerializeField] private LobbyCreateui lobbyCreateui;
     [SerializeField] private TMP_InputField joinCodeInputField;
     [SerializeField] private Transform lobbyContainer;
     [SerializeField] private Transform lobbyTemplate;
@@ -28,7 +28,7 @@ public class LobbyButtonManager : MonoBehaviour
 
     public void OnCreateLobby()
     {
-        lobbyCreateui.Show();
+        //lobbyCreateui.Show();
     }
 
     public void OnQuickJoin()

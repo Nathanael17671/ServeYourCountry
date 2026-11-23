@@ -3,10 +3,10 @@ using Unity.Netcode;
 
 public class PlayerHandMultiplayer : NetworkBehaviour
 {
-    public GameObject heldItem;
+  /*/  public GameObject heldItem;
     public GameObject itemHoldPoint;
     private Collider currentTableCollider;
-    private Table tableScript;
+    private MainTableScript tableScript;
     private Items heldItemScript;
 
     void OnTriggerEnter(Collider other)
@@ -14,8 +14,8 @@ public class PlayerHandMultiplayer : NetworkBehaviour
         if (other.gameObject.CompareTag("Table"))
         {
             currentTableCollider = other;
-            tableScript = currentTableCollider.GetComponent<Table>();
-            other.GetComponent<Table>().SetIndicatorActive(true);
+            tableScript = currentTableCollider.GetComponent<MainTableScript>();
+            other.GetComponent<MainTableScript>().SetIndicatorActive(true);
         }
     }
 
@@ -25,7 +25,7 @@ public class PlayerHandMultiplayer : NetworkBehaviour
         {
             currentTableCollider = null;
             tableScript = null;
-            other.GetComponent<Table>().SetIndicatorActive(false);
+            other.GetComponent<MainTableScript>().SetIndicatorActive(false);
         }
     }
 
@@ -119,5 +119,5 @@ public class PlayerHandMultiplayer : NetworkBehaviour
     void UseHold()
     {
         tableScript.ProssesItemProgress();
-    }
+    }/*/
 }

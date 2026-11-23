@@ -200,35 +200,35 @@ public class TableValidityChecker : MonoBehaviour
             case TableType.Trash:
                 if (!checkItem.placementData.binTable)
                 {
-                    Debug.Log(checkItemID + " can not be placed on " + checkTableType);
+                    //Debug.Log(checkItemID + " can not be placed on " + checkTableType);
                     return false;
                 }
                 return true;
             case TableType.PlayerInteraction:
                 if (!checkItem.placementData.playerInteractionTable)
                 {
-                    Debug.Log(checkItemID + " can not be placed on " + checkTableType);
+                    //Debug.Log(checkItemID + " can not be placed on " + checkTableType);
                     return false;
                 }
                 return true;
             case TableType.ToggleActivation:
                 if (!checkItem.placementData.toggleActivationTable)
                 {
-                    Debug.Log(checkItemID + " not be placed on " + checkTableType);
+                    //Debug.Log(checkItemID + " not be placed on " + checkTableType);
                     return false;
                 }
                 return true;
             case TableType.AlwaysActive:
                 if (!checkItem.placementData.alwaysActiveTable)
                 {
-                    Debug.Log(checkItemID + " can not be placed on " + checkTableType);
+                    //Debug.Log(checkItemID + " can not be placed on " + checkTableType);
                     return false;
                 }
                 return true;
             case TableType.Delivery:
                 if (!checkItem.placementData.deliveryTable)
                 {
-                    Debug.Log(checkItemID + " can not be placed on " + checkTableType);
+                    //Debug.Log(checkItemID + " can not be placed on " + checkTableType);
                     return false;
                 }
                 return true;
