@@ -1,0 +1,302 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcdff81e12c98349b522b8d86a2a20f, type: 3}
+  m_Name: _Item Database SO
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDatabaseSO
+  items:
+  - Name: Plate
+    itemID: 1
+    Prefab: {fileID: 3941924154638449452, guid: 0438dea81cf78b64493bdf9ebb586a22, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 0
+      toggleActivationTable: 0
+      alwaysActiveTable: 0
+      deliveryTable: 1
+    IsAPlate: 1
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Flour
+    itemID: 12
+    Prefab: {fileID: 3414891189287419699, guid: ddd13f612506eee4c86203066d30cdca, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Water
+    itemID: 11
+    Prefab: {fileID: 3414891189287419699, guid: 1712880a3729af545a8cce008c358883, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Wet Flour
+    itemID: 13
+    Prefab: {fileID: 3414891189287419699, guid: cc6338ddfbce25f4f86660f057fd9f6c, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Contraband Part 1
+    itemID: 8
+    Prefab: {fileID: 3414891189287419699, guid: 40b4c3e00e1555d469fdbbb23a4a9197, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Contraband Part 2
+    itemID: 9
+    Prefab: {fileID: 3414891189287419699, guid: 3cf40fe20ea077b4ba5bafaa2d9bbb5b, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Contraband
+    itemID: 10
+    Prefab: {fileID: 3414891189287419699, guid: 7820c0725579a5a48b0570dd55275519, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Dough
+    itemID: 14
+    Prefab: {fileID: 3414891189287419699, guid: 6cda9e287630add4d8ac4c3f460a34df, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: C_Dough
+    itemID: 15
+    Prefab: {fileID: 3414891189287419699, guid: ba4ad3359617f2b4889e42f2ad362de8, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: Bread
+    itemID: 16
+    Prefab: {fileID: 3414891189287419699, guid: 664392d57cab5a34bb0b06d936766012, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  - Name: C_Bread
+    itemID: 16
+    Prefab: {fileID: 3414891189287419699, guid: 664392d57cab5a34bb0b06d936766012, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      playerInteractionTable: 1
+      toggleActivationTable: 1
+      alwaysActiveTable: 1
+      deliveryTable: 1
+    IsAPlate: 0
+    canBePlated: 0
+    usedInAlwaysActiveTable: 0
+    alwaysActiveData:
+      time: 0
+      result: 0
+    usedInPlayerInteractionTable: 0
+    playerInteractionData:
+      time: 0
+      result: 0
+    usedInToggleActivationTable: 0
+    toggleActivationData:
+      time: 0
+      result: 0
+    canBeCombined: 0
+    combineData: []
+  orders: []
