@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerHands : MonoBehaviour
+public class PlayerHands : NetworkBehaviour
 {
     public GameObject heldItem;
     public GameObject itemHoldPoint;
@@ -30,6 +31,11 @@ public class PlayerHands : MonoBehaviour
 
     void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         if (currentTableCollider != null)
         {
             if (Input.GetKeyDown(KeyCode.E))

@@ -158,7 +158,7 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
     {
         try
         {
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(4 - 1);
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(ServeYourCountryMultiplayer.MAX_PLAYER_AMOUNT - 1);
 
             return allocation;
         }
@@ -316,5 +316,10 @@ public class ServeYourCountryLobbyScript : MonoBehaviour
     public Lobby GetLobby()
     {
         return joinedLobby;
+    }
+
+    public void OnApplicationQuit()
+    {
+        Application.Quit();
     }
 }

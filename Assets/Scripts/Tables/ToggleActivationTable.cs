@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class ToggleActivationTable : MonoBehaviour
+public class ToggleActivationTable : NetworkBehaviour
 {
     private MainTableScript mainTableScript;
     internal bool tableIsActive = false;

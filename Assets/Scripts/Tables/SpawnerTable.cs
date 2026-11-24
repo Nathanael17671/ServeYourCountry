@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class SpawnerTable : MonoBehaviour
+public class SpawnerTable : NetworkBehaviour
 {
     private MainTableScript mainTableScript;
     [SerializeField] internal ItemID spawnItem;
@@ -12,7 +13,7 @@ public class SpawnerTable : MonoBehaviour
     }
 
     void Start()
-    {     
+    {
         spawnItemPrefab = mainTableScript.masterManager.itemDatabaseSO.GetItem(spawnItem).Prefab;
         if (spawnItemPrefab == null)
         {
@@ -21,6 +22,7 @@ public class SpawnerTable : MonoBehaviour
         }
         SpawnNewItem();
     }
+
 
     public void SpawnNewItem()
     {

@@ -1,10 +1,11 @@
-using UnityEngine;
-using Unity.Netcode;
 using System;
+using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] private GameObject menuObj;
+    // [SerializeField] private GameObject menuObj;
 
     private void Start()
     {
@@ -31,6 +32,11 @@ public class Menu : MonoBehaviour
     void HideMenu()
     {
         Time.timeScale = 1f;
-        menuObj.SetActive(false);
+        // menuObj.SetActive(false);
+    }
+
+    public void OnMainMenuPressed()
+    {
+        SceneManager.LoadScene("LobbyScene");
     }
 }

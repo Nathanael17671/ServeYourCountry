@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Netcode;
 
-public class Plate : MonoBehaviour
+public class Plate : NetworkBehaviour
 {
     [SerializeField] public List<ItemID> itemTypeList;
     [SerializeField] private List<GameObject> itemGameobjectList;
@@ -53,8 +54,9 @@ public class Plate : MonoBehaviour
         UpdateDisplay();
     }
 
-    void UpdateDisplay()
+    public void UpdateDisplay()
     {
+
         for (int i = 0; i < itemDisplayPoints.Length; i++)
         {
             itemDisplayPoints[i].SetActive(false);

@@ -16,7 +16,10 @@ public class LobbyButtonManager : MonoBehaviour
 
     private void Awake()
     {
-        lobbyTemplate.gameObject.SetActive(false);
+        if (lobbyTemplate != null)
+        {
+            lobbyTemplate.gameObject.SetActive(false);
+        }
     }
 
     public async void OnReturnToMainMenu()
@@ -54,18 +57,21 @@ public class LobbyButtonManager : MonoBehaviour
 
     private void UpdateLobbyList(List<Lobby> lobbyList)
     {
-        foreach (Transform child in lobbyContainer)
+        if (lobbyContainer != null)
         {
-            if (child == lobbyTemplate)
-                continue;
-            Destroy(child.gameObject);
-        }
+            foreach (Transform child in lobbyContainer)
+            {
+                if (child == lobbyTemplate)
+                    continue;
+                Destroy(child.gameObject);
+            }
 
-        foreach (Lobby lobby in lobbyList)
-        {
-            Transform lobbyTransform = Instantiate(lobbyTemplate, lobbyContainer);
-            lobbyTransform.gameObject.SetActive(true);
-            lobbyTransform.GetComponent<LobbyListSingleUi>().SetLobby(lobby);
+            foreach (Lobby lobby in lobbyList)
+            {
+                Transform lobbyTransform = Instantiate(lobbyTemplate, lobbyContainer);
+                lobbyTransform.gameObject.SetActive(true);
+                lobbyTransform.GetComponent<LobbyListSingleUi>().SetLobby(lobby);
+            }
         }
     }
 }

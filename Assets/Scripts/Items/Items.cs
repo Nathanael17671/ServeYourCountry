@@ -1,7 +1,8 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Items : MonoBehaviour
+public class Items : NetworkBehaviour
 {
     public ItemID itemID;
 
@@ -37,6 +38,11 @@ public class Items : MonoBehaviour
 
     void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+
         if (itemData.IsAPlate)
         {
             return;
