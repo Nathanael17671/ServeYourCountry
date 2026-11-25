@@ -64,6 +64,11 @@ public class CustomerController : MonoBehaviour
             serviceType = ServiceType.Counter;
         }
 
+        if (customerType == CustomerType.Nazi)
+        {
+            agent.speed = 2f;
+        }
+
         if (servicePointManager == null ||
             exitPoint == null ||
             !agent.isOnNavMesh)
@@ -176,6 +181,11 @@ public class CustomerController : MonoBehaviour
             case CustomerState.Deciding:
 
                 agent.isStopped = true;
+                break;
+
+            case CustomerState.Eating:
+
+                eatingTime = Random.Range(5f, 15f);
                 break;
 
             case CustomerState.Leaving:
