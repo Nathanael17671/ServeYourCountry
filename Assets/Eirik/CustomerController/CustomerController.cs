@@ -20,6 +20,8 @@ public class CustomerController : MonoBehaviour
     {
         WaitingForServicePoint,
         Entering,
+        MovingToQueue,
+        WaitingInQueue,
         Deciding,
         WaitingToOrder,
         WaitingForFood,
@@ -32,6 +34,7 @@ public class CustomerController : MonoBehaviour
     [SerializeField] private ServiceType serviceType;
 
     [Header("References")]
+    //[SerializeField] private CounterQueueManager counterQueueManager;
     [SerializeField] private ServicePointManager servicePointManager;
     [SerializeField] private ServicePoint assignedServicePoint;
     [SerializeField] private Transform exitPoint;
@@ -40,6 +43,12 @@ public class CustomerController : MonoBehaviour
     [SerializeField] private float decisionTime = 3f;
     [SerializeField] private float eatingTime = 10f;
     [SerializeField] private float retryInterval = 1f;
+
+    [Header("Patience Settings")]
+    [SerializeField] private float counterPatience = 60f;
+    [SerializeField] private float tablePatience = 100f;
+    [SerializeField] private float maxPatience;
+    [SerializeField] private float currentPatience;
 
     [Header("Prototype Settings")]
     [SerializeField] private bool automaticService = true;
@@ -51,6 +60,10 @@ public class CustomerController : MonoBehaviour
 
     private NavMeshAgent agent;
     private float stateTimer;
+    private Transform assignedQueuePoint;
+    public float CurrentPatience => currentPatience;
+    public float MaxPatience => maxPatience;
+    public float PatienceNormalized => maxPatience > 0f ? currentPatience / maxPatience : 0f;
 
     private void Awake()
     {
@@ -77,14 +90,18 @@ public class CustomerController : MonoBehaviour
             enabled = false;
             return;
         }
+        
+        InitializePatience();
 
         ChangeState(CustomerState.WaitingForServicePoint);
-        FindServicePoint();
+        FindServicePoint();        
     }
 
     private void Update()
     {
         stateTimer += Time.deltaTime;
+
+        UpdatePatience();
 
         switch (currentState)
         {
@@ -216,6 +233,11 @@ public class CustomerController : MonoBehaviour
         agent.SetPath(path);
     }
 
+    private void TryJoinQueue()
+    {
+        
+    }
+
     private bool HasReachedDestination()
     {
         if (agent.pathPending) return false;   
@@ -243,6 +265,44 @@ public class CustomerController : MonoBehaviour
         else
         {
             ChangeState(CustomerState.Leaving);
+        }
+    }
+
+    private void InitializePatience()
+    {
+        if (serviceType == ServiceType.Counter)
+        {
+            maxPatience = counterPatience;
+        }
+        else
+        {
+            maxPatience = tablePatience;
+        }
+
+        currentPatience = maxPatience;
+    }
+
+    public bool ShouldDecreasePatience()
+    {
+        if (currentState == CustomerState.WaitingToOrder || currentState == CustomerState.WaitingForFood) 
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
+    private void UpdatePatience()
+    {
+        if (ShouldDecreasePatience())
+        {
+            currentPatience = Mathf.Max(0f, currentPatience - Time.deltaTime);
+
+            if (currentPatience <= 0f)
+            {
+                Debug.Log($"{gameObject.name} ran out of patience!");
+                ChangeState(CustomerState.Leaving); // add loss later
+            }
         }
     }
 
