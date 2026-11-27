@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 867757789132234166}
   - component: {fileID: 8666446894925433416}
   - component: {fileID: 7433326199477073973}
+  - component: {fileID: 839048391988694635}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -47,10 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b76ff2ba9d3462499b82e93fb8d743c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MasterManager
-  itemDatabaseSO: {fileID: 11400000, guid: 114b33f466272204285b7dacf2b83800, type: 2}
+  itemDatabaseSO: {fileID: 11400000, guid: b42ad6d73a7c61242b4c1baa523d467b, type: 2}
+  recipeDatabaseSO: {fileID: 11400000, guid: 5cabb72025038dc41bc2113f98f07e19, type: 2}
+  orderDatabaseSO: {fileID: 11400000, guid: 1767d3c16dcc9e440b0d89bc72ac9808, type: 2}
   orderManager: {fileID: 867757789132234166}
-  tableValidityChecker: {fileID: 7433326199477073973}
   tableManager: {fileID: 8666446894925433416}
+  tableValidityChecker: {fileID: 7433326199477073973}
+  recipeChecker: {fileID: 839048391988694635}
 --- !u!114 &867757789132234166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,4 +94,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91b001ba94b9e24d9a59c06b7f171cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TableValidityChecker
+  masterManager: {fileID: 4186887194004271658}
+--- !u!114 &839048391988694635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735869079991376403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd473fce236a3c4c978604f52a5eb88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeChecker
   masterManager: {fileID: 4186887194004271658}

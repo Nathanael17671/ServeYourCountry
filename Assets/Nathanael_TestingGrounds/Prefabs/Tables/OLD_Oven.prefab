@@ -154,7 +154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 359710274005348677}
   m_Layer: 0
-  m_Name: Oven
+  m_Name: OLD_Oven
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -333,7 +333,9 @@ GameObject:
   - component: {fileID: 4320450073341261992}
   - component: {fileID: 1516854115527611494}
   - component: {fileID: 9167643885761755219}
+  - component: {fileID: 43549114143116812}
   - component: {fileID: 8032611042999243608}
+  - component: {fileID: 3138520307088623357}
   m_Layer: 0
   m_Name: Table Script
   m_TagString: Table
@@ -391,7 +393,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
   itemHoldPoint: {fileID: 1973248141792066132}
   indicator: {fileID: 5467281997873357486}
-  mainTableType: 4
+  tableType: 0
+  startItemType: 0
+  startIngridient: 0
+  startContainer: 0
+--- !u!114 &43549114143116812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2183998105842888114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89606a5904b738848952f11516d727e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorkbenchScript
+  workbenchName: 1
+  workbenchType: 2
 --- !u!114 &8032611042999243608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +425,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ToggleActivationTable
   tableActiveDisplay: {fileID: 106837409631664590}
   tableInactiveDisplay: {fileID: 4162097702291647784}
+--- !u!114 &3138520307088623357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2183998105842888114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e55d9016f2a30441bd3ee383de040e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TableColider
+  mainTableScript: {fileID: 9167643885761755219}
 --- !u!1 &2278905694902173355
 GameObject:
   m_ObjectHideFlags: 0

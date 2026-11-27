@@ -62,7 +62,8 @@ public class DiningTable : MonoBehaviour
         OrderData orderData = orderDatabaseSO.orders[randomOrder];
 
         ClearOrder();
-        spriteRenderer.sprite = orderData.sprite;
+        if (orderData.sprite != null || spriteRenderer != null)
+            spriteRenderer.sprite = orderData.sprite;
         for(int i = 0; i < orderData.ingridients.Count; i++)
         {
             customerOrder.Add(orderData.ingridients[i]);
