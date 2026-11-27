@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 7031271362953404325}
   - component: {fileID: 6570185527127530692}
   - component: {fileID: 8488298086065851593}
+  - component: {fileID: -4919312854280953316}
   m_Layer: 0
   m_Name: CustomerPrototype
   m_TagString: Untagged
@@ -425,6 +426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomerController
   customerType: 1
   serviceType: 0
+  counterQueueManager: {fileID: 0}
   servicePointManager: {fileID: 0}
   assignedServicePoint: {fileID: 0}
   exitPoint: {fileID: 0}
@@ -439,3 +441,18 @@ MonoBehaviour:
   testOrderTime: 3
   testDeliveryTime: 5
   currentState: 0
+--- !u!114 &-4919312854280953316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9012572211676509412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be06011411a7fe443ba7de283ffe4082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CounterQueueManager
+  queuePoints: []
+  servicePointManager: {fileID: 0}
+  waitingCustomers: []

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,7 +35,7 @@ public class CustomerController : MonoBehaviour
     [SerializeField] private ServiceType serviceType;
 
     [Header("References")]
-    //[SerializeField] private CounterQueueManager counterQueueManager;
+    [SerializeField] private CounterQueueManager counterQueueManager;
     [SerializeField] private ServicePointManager servicePointManager;
     [SerializeField] private ServicePoint assignedServicePoint;
     [SerializeField] private Transform exitPoint;
@@ -134,6 +135,21 @@ public class CustomerController : MonoBehaviour
                 }
                 break;
 
+            case CustomerState.MovingToQueue:
+
+                if (HasReachedDestination())
+                {
+                    transform.rotation = assignedQueuePoint.rotation;
+
+                    ChangeState(CustomerState.WaitingInQueue);
+                }
+                break;
+
+            case CustomerState.WaitingInQueue:
+
+                UpdateQueuePosition();
+                break;
+
             case CustomerState.WaitingToOrder:
 
                 if (automaticService && stateTimer >= testOrderTime)
@@ -170,6 +186,16 @@ public class CustomerController : MonoBehaviour
 
     private void FindServicePoint()
     {
+        if (serviceType == ServiceType.Counter)
+        {
+            if (counterQueueManager != null)
+            {
+                TryJoinQueue();
+            }
+            
+            return;
+        }
+
         assignedServicePoint = servicePointManager.RequestServicePoint(this, serviceType);
 
         if (assignedServicePoint != null)
@@ -193,6 +219,16 @@ public class CustomerController : MonoBehaviour
             case CustomerState.Entering:
 
                 MoveTo(assignedServicePoint.transform.position);
+                break;
+
+            case CustomerState.MovingToQueue:
+
+                MoveTo(assignedQueuePoint.position);
+                break;
+
+            case CustomerState.WaitingInQueue:
+
+                agent.isStopped = true;
                 break;
 
             case CustomerState.Deciding:
@@ -235,7 +271,17 @@ public class CustomerController : MonoBehaviour
 
     private void TryJoinQueue()
     {
-        
+        if (!counterQueueManager.JoinQueue(this)) return;
+
+        assignedQueuePoint = counterQueueManager.GetQueuePoint(this);
+
+        if (assignedQueuePoint == null)
+        {
+            counterQueueManager.LeaveQueue(this);
+            return;
+        }
+
+        ChangeState(CustomerState.WaitingInQueue);
     }
 
     private bool HasReachedDestination()
@@ -304,6 +350,31 @@ public class CustomerController : MonoBehaviour
                 ChangeState(CustomerState.Leaving); // add loss later
             }
         }
+    }
+
+    private void UpdateQueuePosition()
+    {
+        Transform newQuueuePoint = counterQueueManager.GetQueuePoint(this);
+
+        if (assignedQueuePoint == null) return;
+
+        if (newQuueuePoint != assignedQueuePoint)
+        {
+            assignedQueuePoint = newQuueuePoint;
+
+            ChangeState(CustomerState.MovingToQueue);
+        }
+    }
+
+    private void TryReserveCounter() //--------------------------------------------
+    {
+        if (!counterQueueManager.IsFirstInQueue(this)) return;
+
+
+        servicePointManager.RequestServicePoint(this, serviceType);
+
+        ChangeState(CustomerState.Entering);
+      
     }
 
     private void ReleaseServicePoint()

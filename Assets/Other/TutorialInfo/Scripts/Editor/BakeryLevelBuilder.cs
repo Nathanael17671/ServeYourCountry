@@ -106,13 +106,18 @@ public class LevelBuilder : EditorWindow
     private void DuringSceneGUI(SceneView view)
     {
         if (!building || EditorApplication.isPlayingOrWillChangePlaymode || parent == null || EditorUtility.IsPersistent(parent)) return;
+
         Event e = Event.current;
+
         if (e.type == EventType.KeyDown && e.keyCode == KeyCode.Escape) { building = false; painting = false; e.Use(); Repaint(); view.Repaint(); return; }
         if (e.type == EventType.KeyDown && e.keyCode == KeyCode.R && !e.control && !e.command && !e.alt) { Rotate(); e.Use(); }
         if (e.type == EventType.MouseUp && e.button == 0) { painting = false; lastPaintPosition = null; }
         if (e.type == EventType.Layout && !e.alt) HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
+
         Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
+
         if (!new Plane(Vector3.up, new Vector3(0, floorHeight, 0)).Raycast(ray, out float distance)) return;
+
         Vector3 point = ray.GetPoint(distance);
         Entry entry = Selected;
         Vector3 offset = entry == null ? Vector3.zero : entry.offset;
@@ -124,11 +129,14 @@ public class LevelBuilder : EditorWindow
         GameObject prefab = entry?.prefab;
         bool valid = prefab != null && PrefabUtility.IsPartOfPrefabAsset(prefab) && (!checkOccupied || !Occupied(pos));
         Quaternion facing = Quaternion.Euler(0, rotation, 0);
+
         if (e.type == EventType.Repaint)
         {
             if (showGrid) DrawGrid(point, entry == null ? Vector3.zero : entry.offset);
+
             Handles.color = valid ? Color.green : Color.red;
             Handles.DrawWireCube(pos + Vector3.up * 0.025f, new Vector3(gridSize, 0.01f, gridSize));
+
             if (prefab != null) DrawMeshPreview(prefab, pos, facing, valid);
             Handles.ArrowHandleCap(0, pos + Vector3.up * 0.1f, facing, gridSize * 0.45f, EventType.Repaint);
         }
@@ -137,13 +145,19 @@ public class LevelBuilder : EditorWindow
             if (e.type == EventType.MouseDown)
             {
                 if (e.shift) RemoveHovered(e.mousePosition);
-                else { painting = paint && snap; lastPaintPosition = pos; if (valid) Place(prefab, pos, facing); }
+
+                else 
+                { 
+                    painting = paint && snap; lastPaintPosition = pos; if (valid) Place(prefab, pos, facing); 
+                }
                 e.Use();
             }
             else if (e.type == EventType.MouseDrag && painting && !e.shift)
             {
                 if (!lastPaintPosition.HasValue || (lastPaintPosition.Value - pos).sqrMagnitude > 0.000001f)
-                { if (valid) Place(prefab, pos, facing); lastPaintPosition = pos; }
+                { 
+                    if (valid) Place(prefab, pos, facing); lastPaintPosition = pos; 
+                }
                 e.Use();
             }
         }
@@ -153,6 +167,7 @@ public class LevelBuilder : EditorWindow
     private bool Occupied(Vector3 pos)
     {
         foreach (Transform child in parent) if ((child.position - pos).sqrMagnitude < 0.000001f) return true;
+
         return false;
     }
 
@@ -166,9 +181,13 @@ public class LevelBuilder : EditorWindow
     private void RemoveHovered(Vector2 mouse)
     {
         GameObject picked = HandleUtility.PickGameObject(mouse, false);
+
         if (picked == null || picked.transform == parent || !picked.transform.IsChildOf(parent)) return;
+
         Transform root = picked.transform;
+
         while (root.parent != parent) root = root.parent;
+
         Undo.DestroyObjectImmediate(root.gameObject);
     }
 
@@ -180,6 +199,7 @@ public class LevelBuilder : EditorWindow
         float y = floorHeight + 0.02f;
         float extent = (radius + 0.5f) * gridSize;
         Handles.color = new Color(1, 1, 1, 0.25f);
+
         for (int i = -radius; i <= radius + 1; i++)
         {
             float d = (i - 0.5f) * gridSize;
@@ -190,19 +210,23 @@ public class LevelBuilder : EditorWindow
 
     private void DrawMeshPreview(GameObject prefab, Vector3 pos, Quaternion facing, bool valid)
     {
-        // Draw meshes only: no preview GameObject or gameplay components are instantiated.
+        // Draw meshe outline only: no preview GameObject or gameplay components are instantiated.
         if (previewMaterial == null)
         {
             Shader shader = Shader.Find("Hidden/Internal-Colored");
+
             if (shader == null) return;
+
             previewMaterial = new Material(shader) { hideFlags = HideFlags.HideAndDontSave };
             previewMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
             previewMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
             previewMaterial.SetInt("_ZWrite", 0);
             previewMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Back);
         }
+
         previewMaterial.SetColor("_Color", valid ? new Color(0.2f, 1f, 0.4f, 0.35f) : new Color(1f, 0.2f, 0.2f, 0.35f));
         Matrix4x4 root = Matrix4x4.TRS(pos, facing, prefab.transform.localScale);
+
         foreach (MeshFilter filter in prefab.GetComponentsInChildren<MeshFilter>())
         {
             if (filter.sharedMesh == null) continue;
