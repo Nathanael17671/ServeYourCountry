@@ -53,7 +53,7 @@ MonoBehaviour:
       counter: 1
       stove: 1
       mixer: 0
-      toolBench: 0
+      toolBench: 1
     canBeStoredIn: 
   - Name: Contraband Part 2
     ingridientID: 2
@@ -66,7 +66,7 @@ MonoBehaviour:
       counter: 1
       stove: 1
       mixer: 0
-      toolBench: 0
+      toolBench: 1
     canBeStoredIn: 
   - Name: Contraband Part 1 & 2
     ingridientID: 3
