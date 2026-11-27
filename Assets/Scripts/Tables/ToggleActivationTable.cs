@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ToggleActivationTable : MonoBehaviour
@@ -39,6 +40,7 @@ public class ToggleActivationTable : MonoBehaviour
         tableActiveDisplay.SetActive(true);
         tableInactiveDisplay.SetActive(false);
         tableIsActive = true;
+        mainTableScript.workbenchScript.canPickupPutDown = false;
     }
 
 
@@ -47,24 +49,19 @@ public class ToggleActivationTable : MonoBehaviour
         tableActiveDisplay.SetActive(false);
         tableInactiveDisplay.SetActive(true);
         tableIsActive = false;
+        mainTableScript.workbenchScript.canPickupPutDown = true;
     }
 
     void Update()
     {
-        if (!tableIsActive)
-        {
-            return;
-        }
-        if (mainTableScript.heldTableItem == null)
-        {
-            return;
-        }
-        if (!mainTableScript.heldTableItemScript.itemData.usedInToggleActivationTable)
+        if (!tableIsActive) return;
+        if (!mainTableScript.HasItemOnTable()) return;
+        if (!mainTableScript.workbenchScript.hasValidRecipe)
         {
             ProssesToggleOff();
             return;
         }
-        mainTableScript.heldTableItemScript.currentToggleActivationTime += Time.deltaTime;
-        mainTableScript.heldTableItemScript.UpdateProgressBar(mainTableScript.mainTableType);        
+        mainTableScript.tableItemScript.currentTime += Time.deltaTime;
+        mainTableScript.tableItemScript.UpdateProgressBar(WorkbenchType.ToggleActivation);        
     }
 }

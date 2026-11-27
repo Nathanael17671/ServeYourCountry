@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9176508726815540255}
+  - component: {fileID: 1850670675936817166}
+  - component: {fileID: 3987689376904097526}
   m_Layer: 0
   m_Name: Bin
   m_TagString: Untagged
@@ -35,6 +37,34 @@ Transform:
   - {fileID: 5166310990768528437}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1850670675936817166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821761979575997378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
+  itemHoldPoint: {fileID: 2962444307436142676}
+  indicator: {fileID: 3730396363096451155}
+  tableType: 2
+  workbenchType: 0
+--- !u!114 &3987689376904097526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821761979575997378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1541413c3cb04844bb0e4c4e86384f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrashTable
 --- !u!1 &1186106814727802215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,8 +1266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5009016010985658224}
   - component: {fileID: 5405996005949550825}
-  - component: {fileID: 630448900392101421}
-  - component: {fileID: 7413738831917666114}
+  - component: {fileID: 343017537069136147}
   m_Layer: 0
   m_Name: Table Script
   m_TagString: Table
@@ -1281,7 +1310,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &630448900392101421
+--- !u!114 &343017537069136147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1290,21 +1319,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8987991862915539289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e55d9016f2a30441bd3ee383de040e1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
-  itemHoldPoint: {fileID: 2962444307436142676}
-  indicator: {fileID: 3730396363096451155}
-  mainTableType: 2
---- !u!114 &7413738831917666114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8987991862915539289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1541413c3cb04844bb0e4c4e86384f0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrashTable
+  m_EditorClassIdentifier: Assembly-CSharp::TableColider
+  mainTableScript: {fileID: 1850670675936817166}

@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 359710274005348677}
+  - component: {fileID: 6277069263383041481}
+  - component: {fileID: 204817986471108123}
+  - component: {fileID: 8955091860406273940}
   m_Layer: 0
   m_Name: Stove
   m_TagString: Untagged
@@ -35,6 +38,51 @@ Transform:
   - {fileID: 4021746039762378995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6277069263383041481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725031063650036663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
+  itemHoldPoint: {fileID: 1973248141792066132}
+  indicator: {fileID: 5467281997873357486}
+  tableType: 4
+  workbenchType: 3
+  startItemType: 0
+  startIngridient: 0
+  startContainer: 0
+--- !u!114 &204817986471108123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725031063650036663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89606a5904b738848952f11516d727e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorkbenchScript
+  workbenchName: 3
+  workbenchType: 3
+--- !u!114 &8955091860406273940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725031063650036663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6efcec587660b042b5590e43000cceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AlwaysActiveTable
 --- !u!1 &1973248141792066132
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,8 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4320450073341261992}
   - component: {fileID: 1516854115527611494}
-  - component: {fileID: 8343464255525549975}
-  - component: {fileID: 4045290200314318744}
+  - component: {fileID: 3592195697422894971}
   m_Layer: 0
   m_Name: Table Script
   m_TagString: Table
@@ -121,7 +168,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8343464255525549975
+--- !u!114 &3592195697422894971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,24 +177,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2183998105842888114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e55d9016f2a30441bd3ee383de040e1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
-  itemHoldPoint: {fileID: 1973248141792066132}
-  indicator: {fileID: 5467281997873357486}
-  mainTableType: 5
---- !u!114 &4045290200314318744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2183998105842888114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6efcec587660b042b5590e43000cceb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AlwaysActiveTable
+  m_EditorClassIdentifier: Assembly-CSharp::TableColider
+  mainTableScript: {fileID: 6277069263383041481}
 --- !u!1 &3141935497004449218
 GameObject:
   m_ObjectHideFlags: 0

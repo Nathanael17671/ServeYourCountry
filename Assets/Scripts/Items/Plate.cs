@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Plate : MonoBehaviour
 {
+    /*/
     [SerializeField] public List<ItemID> itemTypeList;
     [SerializeField] private List<GameObject> itemGameobjectList;
 
@@ -97,5 +98,5 @@ public class Plate : MonoBehaviour
         item.transform.localRotation = Quaternion.identity;
         item.transform.localScale = Vector3.one;
         
-    }
+    }/*/
 }

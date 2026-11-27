@@ -12,301 +12,189 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bcdff81e12c98349b522b8d86a2a20f, type: 3}
   m_Name: _Item Database SO
   m_EditorClassIdentifier: Assembly-CSharp::ItemDatabaseSO
-  items:
+  containers:
   - Name: Plate
-    itemID: 1
+    containerID: 1
     Prefab: {fileID: 3941924154638449452, guid: 0438dea81cf78b64493bdf9ebb586a22, type: 3}
+    isForDelivery: 1
+    storageSpace: 4
     placementData:
       normalTable: 1
       binTable: 1
-      playerInteractionTable: 0
-      toggleActivationTable: 0
-      alwaysActiveTable: 0
       deliveryTable: 1
-    IsAPlate: 1
-    canBePlated: 0
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 0
-    playerInteractionData:
-      time: 0
-      result: 0
-    usedInToggleActivationTable: 0
-    toggleActivationData:
-      time: 0
-      result: 0
-    canBeCombined: 0
-    combineData: []
-  - Name: Flour
-    itemID: 12
-    Prefab: {fileID: 3414891189287419699, guid: ee5cca2987421fd479891c067b0d303c, type: 3}
+      oven: 0
+      counter: 1
+      stove: 0
+      mixer: 0
+      toolBench: 0
+  - Name: Bowl
+    containerID: 2
+    Prefab: {fileID: 3941924154638449452, guid: 0168c0fad9783204fa34bf884ef2cb95, type: 3}
+    isForDelivery: 0
+    storageSpace: 2
     placementData:
       normalTable: 1
       binTable: 1
-      playerInteractionTable: 1
-      toggleActivationTable: 1
-      alwaysActiveTable: 1
       deliveryTable: 1
-    IsAPlate: 0
-    canBePlated: 0
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 0
-    playerInteractionData:
-      time: 0
-      result: 0
-    usedInToggleActivationTable: 0
-    toggleActivationData:
-      time: 0
-      result: 0
-    canBeCombined: 1
-    combineData:
-    - item: 11
-      result: 13
-  - Name: Water
-    itemID: 11
-    Prefab: {fileID: 3414891189287419699, guid: 1712880a3729af545a8cce008c358883, type: 3}
-    placementData:
-      normalTable: 1
-      binTable: 1
-      playerInteractionTable: 1
-      toggleActivationTable: 1
-      alwaysActiveTable: 1
-      deliveryTable: 1
-    IsAPlate: 0
-    canBePlated: 0
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 0
-    playerInteractionData:
-      time: 0
-      result: 0
-    usedInToggleActivationTable: 0
-    toggleActivationData:
-      time: 0
-      result: 0
-    canBeCombined: 0
-    combineData: []
-  - Name: Wet Flour
-    itemID: 13
-    Prefab: {fileID: 3414891189287419699, guid: cc6338ddfbce25f4f86660f057fd9f6c, type: 3}
-    placementData:
-      normalTable: 1
-      binTable: 1
-      playerInteractionTable: 1
-      toggleActivationTable: 1
-      alwaysActiveTable: 1
-      deliveryTable: 1
-    IsAPlate: 0
-    canBePlated: 0
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 1
-    playerInteractionData:
-      time: 5
-      result: 14
-    usedInToggleActivationTable: 0
-    toggleActivationData:
-      time: 0
-      result: 0
-    canBeCombined: 0
-    combineData: []
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 1
+      toolBench: 0
+  ingridients:
   - Name: Contraband Part 1
-    itemID: 8
+    ingridientID: 1
     Prefab: {fileID: 3414891189287419699, guid: 40b4c3e00e1555d469fdbbb23a4a9197, type: 3}
     placementData:
       normalTable: 1
       binTable: 1
-      playerInteractionTable: 1
-      toggleActivationTable: 1
-      alwaysActiveTable: 1
       deliveryTable: 1
-    IsAPlate: 0
-    canBePlated: 0
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 0
-    playerInteractionData:
-      time: 0
-      result: 0
-    usedInToggleActivationTable: 0
-    toggleActivationData:
-      time: 0
-      result: 0
-    canBeCombined: 0
-    combineData:
-    - item: 9
-      result: 10
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 
   - Name: Contraband Part 2
-    itemID: 9
+    ingridientID: 2
     Prefab: {fileID: 3414891189287419699, guid: 3cf40fe20ea077b4ba5bafaa2d9bbb5b, type: 3}
     placementData:
       normalTable: 1
       binTable: 1
-      playerInteractionTable: 1
-      toggleActivationTable: 1
-      alwaysActiveTable: 1
       deliveryTable: 1
-    IsAPlate: 0
-    canBePlated: 0
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 0
-    playerInteractionData:
-      time: 0
-      result: 0
-    usedInToggleActivationTable: 0
-    toggleActivationData:
-      time: 0
-      result: 0
-    canBeCombined: 0
-    combineData: []
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 
+  - Name: Contraband Part 1 & 2
+    ingridientID: 3
+    Prefab: {fileID: 3414891189287419699, guid: 38859af8502f15a4fb75256617d5ad6e, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      deliveryTable: 1
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 1
+      toolBench: 1
+    canBeStoredIn: 01000000
   - Name: Contraband
-    itemID: 10
+    ingridientID: 6
     Prefab: {fileID: 3414891189287419699, guid: 7820c0725579a5a48b0570dd55275519, type: 3}
     placementData:
       normalTable: 1
       binTable: 1
-      playerInteractionTable: 1
-      toggleActivationTable: 1
-      alwaysActiveTable: 1
       deliveryTable: 1
-    IsAPlate: 0
-    canBePlated: 0
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 0
-    playerInteractionData:
-      time: 0
-      result: 0
-    usedInToggleActivationTable: 0
-    toggleActivationData:
-      time: 0
-      result: 0
-    canBeCombined: 0
-    combineData:
-    - item: 14
-      result: 15
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 
+  - Name: Water
+    ingridientID: 4
+    Prefab: {fileID: 3414891189287419699, guid: 1712880a3729af545a8cce008c358883, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      deliveryTable: 1
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 02000000
+  - Name: Flour
+    ingridientID: 5
+    Prefab: {fileID: 3414891189287419699, guid: ee5cca2987421fd479891c067b0d303c, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      deliveryTable: 1
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 02000000
+  - Name: Unbeat Dough
+    ingridientID: 11
+    Prefab: {fileID: 3414891189287419699, guid: fb902af18f7c2b54cb3a3243e5779486, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      deliveryTable: 1
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 
   - Name: Dough
-    itemID: 14
+    ingridientID: 7
     Prefab: {fileID: 3414891189287419699, guid: 6cda9e287630add4d8ac4c3f460a34df, type: 3}
     placementData:
       normalTable: 1
       binTable: 1
-      playerInteractionTable: 1
-      toggleActivationTable: 1
-      alwaysActiveTable: 1
       deliveryTable: 1
-    IsAPlate: 0
-    canBePlated: 0
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 0
-    playerInteractionData:
-      time: 0
-      result: 0
-    usedInToggleActivationTable: 1
-    toggleActivationData:
-      time: 10
-      result: 16
-    canBeCombined: 0
-    combineData: []
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 
   - Name: C_Dough
-    itemID: 15
+    ingridientID: 8
     Prefab: {fileID: 3414891189287419699, guid: ba4ad3359617f2b4889e42f2ad362de8, type: 3}
     placementData:
       normalTable: 1
       binTable: 1
-      playerInteractionTable: 1
-      toggleActivationTable: 1
-      alwaysActiveTable: 1
       deliveryTable: 1
-    IsAPlate: 0
-    canBePlated: 0
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 0
-    playerInteractionData:
-      time: 0
-      result: 0
-    usedInToggleActivationTable: 1
-    toggleActivationData:
-      time: 10
-      result: 17
-    canBeCombined: 0
-    combineData: []
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 
   - Name: Bread
-    itemID: 16
+    ingridientID: 9
     Prefab: {fileID: 3414891189287419699, guid: 664392d57cab5a34bb0b06d936766012, type: 3}
     placementData:
       normalTable: 1
       binTable: 1
-      playerInteractionTable: 1
-      toggleActivationTable: 1
-      alwaysActiveTable: 1
       deliveryTable: 1
-    IsAPlate: 0
-    canBePlated: 1
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 0
-    playerInteractionData:
-      time: 0
-      result: 0
-    usedInToggleActivationTable: 0
-    toggleActivationData:
-      time: 0
-      result: 0
-    canBeCombined: 0
-    combineData: []
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 01000000
   - Name: C_Bread
-    itemID: 17
+    ingridientID: 10
     Prefab: {fileID: 3414891189287419699, guid: 515486c27a8af3e479b9973c1616e97d, type: 3}
     placementData:
       normalTable: 1
       binTable: 1
-      playerInteractionTable: 1
-      toggleActivationTable: 1
-      alwaysActiveTable: 1
       deliveryTable: 1
-    IsAPlate: 0
-    canBePlated: 1
-    usedInAlwaysActiveTable: 0
-    alwaysActiveData:
-      time: 0
-      result: 0
-    usedInPlayerInteractionTable: 0
-    playerInteractionData:
-      time: 0
-      result: 0
-    usedInToggleActivationTable: 0
-    toggleActivationData:
-      time: 0
-      result: 0
-    canBeCombined: 0
-    combineData: []
-  orders:
-  - Name: Normal Bread
-    ingridients: 10000000
-  - Name: Contraband Bread
-    ingridients: 11000000
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 01000000
+  - Name: Burned
+    ingridientID: 12
+    Prefab: {fileID: 3414891189287419699, guid: 8cf3b3717e8d9eb429bc07b580682343, type: 3}
+    placementData:
+      normalTable: 1
+      binTable: 1
+      deliveryTable: 1
+      oven: 1
+      counter: 1
+      stove: 1
+      mixer: 0
+      toolBench: 0
+    canBeStoredIn: 

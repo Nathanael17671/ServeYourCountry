@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1414620273829790346}
   serializedVersion: 2
   m_LocalRotation: {x: -0.12567139, y: -0.0062691476, z: -0.20896593, w: 0.96979415}
-  m_LocalPosition: {x: 0.01, y: -0.047, z: -0.065}
+  m_LocalPosition: {x: 0.01, y: -0.006, z: -0.065}
   m_LocalScale: {x: 0.5, y: 0.25, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 3290410482399039943}
   - component: {fileID: 3025861469941964826}
   - component: {fileID: 5022314869384231515}
-  - component: {fileID: 8272894913653451300}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -62,7 +61,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.05, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 0.65, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7071699003941305351}
@@ -124,27 +123,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8272894913653451300
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3545211565297215331}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5075377913574919776
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +134,6 @@ GameObject:
   - component: {fileID: 89247828279876104}
   - component: {fileID: 8151967383443117934}
   - component: {fileID: 537439836466224339}
-  - component: {fileID: 8157108378171096693}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -236,27 +213,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8157108378171096693
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5075377913574919776}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6931690397669851536
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +224,6 @@ GameObject:
   - component: {fileID: 7083540208505581280}
   - component: {fileID: 7644417926844249289}
   - component: {fileID: 5205731930462864021}
-  - component: {fileID: 6234675505801865715}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -348,27 +303,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6234675505801865715
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6931690397669851536}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1860169524550550559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -425,14 +359,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5481164867418291080, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
+      propertyPath: ingridientID
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5589856526118351521, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
       propertyPath: itemID
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 5589856526118351521, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
-      propertyPath: itemDatabaseSO
-      value: 
-      objectReference: {fileID: 11400000, guid: b42ad6d73a7c61242b4c1baa523d467b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7776304091466309830, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}

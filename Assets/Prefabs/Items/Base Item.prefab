@@ -134,7 +134,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -184927175
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &1803032752934718300
@@ -263,6 +263,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4907874470209530288}
   - component: {fileID: 5589856526118351521}
+  - component: {fileID: 5481164867418291080}
   m_Layer: 0
   m_Name: Base Item
   m_TagString: Untagged
@@ -299,10 +300,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2402b1fc9493e6645a97a9deb9b21775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupObject
-  itemID: 0
+  itemType: 1
   itemDatabaseSO: {fileID: 11400000, guid: b42ad6d73a7c61242b4c1baa523d467b, type: 2}
   fillImage: {fileID: 3013584008105734008}
   progressBar: {fileID: 2399821172657480272}
+--- !u!114 &5481164867418291080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941924154638449452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41c1894c458693a4599f5d4d2891bb51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngridientScript
+  ingridientID: 0
 --- !u!1 &7776304091466309830
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +328,6 @@ GameObject:
   - component: {fileID: 171201506325420041}
   - component: {fileID: 6126582615059965467}
   - component: {fileID: 3066633770139386850}
-  - component: {fileID: 8641407908930885933}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -394,29 +407,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8641407908930885933
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7776304091466309830}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &8420516012375876189
 GameObject:
   m_ObjectHideFlags: 0

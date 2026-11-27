@@ -266,6 +266,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1862609906472858983}
+  - component: {fileID: 1131043871582145610}
+  - component: {fileID: 3061954191472151883}
+  - component: {fileID: 1153231612700938004}
   m_Layer: 0
   m_Name: ChoppingBoard
   m_TagString: Untagged
@@ -292,6 +295,53 @@ Transform:
   - {fileID: 5508390362252171856}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1131043871582145610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4504286787589608240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
+  itemHoldPoint: {fileID: 5651448619926746191}
+  indicator: {fileID: 1908763896763055905}
+  tableType: 4
+  workbenchType: 1
+  startItemType: 0
+  startIngridient: 0
+  startContainer: 0
+--- !u!114 &3061954191472151883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4504286787589608240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89606a5904b738848952f11516d727e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorkbenchScript
+  workbenchName: 2
+  workbenchType: 1
+--- !u!114 &1153231612700938004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4504286787589608240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47a492f990a514489cc2eebb4bb9863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionTable
+  progressCooldown: 0.25
+  progressAmount: 0.25
 --- !u!1 &5429358278627472606
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,8 +495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4269028859981692751}
   - component: {fileID: 6198710360573452158}
-  - component: {fileID: 1802500593734940847}
-  - component: {fileID: 4704372348734949894}
+  - component: {fileID: 4287020841553346617}
   m_Layer: 0
   m_Name: Table Script
   m_TagString: Table
@@ -490,7 +539,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1802500593734940847
+--- !u!114 &4287020841553346617
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -499,23 +548,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8156872866623593454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e55d9016f2a30441bd3ee383de040e1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
-  itemHoldPoint: {fileID: 5651448619926746191}
-  indicator: {fileID: 1908763896763055905}
-  mainTableType: 3
---- !u!114 &4704372348734949894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8156872866623593454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f47a492f990a514489cc2eebb4bb9863, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionTable
-  progressCooldown: 0.25
-  progressAmount: 0.25
+  m_EditorClassIdentifier: Assembly-CSharp::TableColider
+  mainTableScript: {fileID: 1131043871582145610}

@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a34fb8f0cb68b54aaddb80789557039, type: 3}
+  m_Name: _Recipe Database SO
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeDatabaseSO
+  workbenches:
+  - Name: Counter
+    workbenchName: 2
+    workbenchID: 1
+    description: 
+    recipes:
+    - Name: Beat that Dough
+      neededContainer: 0
+      ingridients: 0b000000
+      time: 5
+      result: 7
+  - Name: Oven
+    workbenchName: 1
+    workbenchID: 2
+    description: 
+    recipes:
+    - Name: Bread
+      neededContainer: 0
+      ingridients: 07000000
+      time: 15
+      result: 9
+    - Name: C_Bread
+      neededContainer: 0
+      ingridients: 08000000
+      time: 15
+      result: 10
+    - Name: Burned
+      neededContainer: 0
+      ingridients: 09000000
+      time: 10
+      result: 12
+    - Name: C_Burned
+      neededContainer: 0
+      ingridients: 0a000000
+      time: 10
+      result: 12
+  - Name: Stove
+    workbenchName: 3
+    workbenchID: 3
+    description: 
+    recipes:
+    - Name: Bread
+      neededContainer: 0
+      ingridients: 07000000
+      time: 7
+      result: 9
+    - Name: C_Bread
+      neededContainer: 0
+      ingridients: 08000000
+      time: 7
+      result: 10
+  - Name: Mixer
+    workbenchName: 4
+    workbenchID: 2
+    description: 
+    recipes:
+    - Name: Dough
+      neededContainer: 2
+      ingridients: 0400000005000000
+      time: 10
+      result: 11
+  - Name: Tool Bench
+    workbenchName: 5
+    workbenchID: 1
+    description: 
+    recipes:
+    - Name: Contraband Assembly
+      neededContainer: 0
+      ingridients: 03000000
+      time: 10
+      result: 6
+  combines:
+  - Name: Contraband
+    item_1: 1
+    item_2: 2
+    result: 3
+  - Name: Contraband Dough
+    item_1: 6
+    item_2: 7
+    result: 8

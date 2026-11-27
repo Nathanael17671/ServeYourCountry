@@ -4,22 +4,23 @@ using System.Collections.Generic;
 public class OrderManager : MonoBehaviour
 {
     [SerializeField] internal MasterManager masterManager;
-    private ItemDatabaseSO itemDatabaseSO;
+    private OrderDatabaseSO orderDatabaseSO;
     public List<DiningTable> diningTables;
 
     void Awake()
     {
-        itemDatabaseSO = masterManager.itemDatabaseSO;
-        for(int i = 0; i < itemDatabaseSO.orders.Count; i++)
+        orderDatabaseSO = masterManager.orderDatabaseSO;
+        ItemDatabaseSO itemDatabaseSO = masterManager.itemDatabaseSO;
+        for(int i = 0; i < orderDatabaseSO.orders.Count; i++)
         {
-            itemDatabaseSO.orders[i].ingridients.Sort();
-            for(int j = 0; j < itemDatabaseSO.orders[i].ingridients.Count; j++)
+            orderDatabaseSO.orders[i].ingridients.Sort();
+            for(int j = 0; j < orderDatabaseSO.orders[i].ingridients.Count; j++)
             {
-                ItemID ingridientID = itemDatabaseSO.orders[i].ingridients[j];
-                ItemData ingridientData = itemDatabaseSO.GetItem(ingridientID);
-                if (!ingridientData.canBePlated)
+                IngridientID ingridientID = orderDatabaseSO.orders[i].ingridients[j];
+                IngridientData ingridientData = itemDatabaseSO.GetIngridient(ingridientID);
+                if (!ingridientData.canBeStoredIn.Contains(ContainerID.DeliveryPlate))
                 {
-                    Debug.LogError(ingridientID + " in recipe " + itemDatabaseSO.orders[i].Name + ", can not be plated!");
+                    Debug.LogError("Order Can Not be Plated");
                 }
             }
         }
@@ -36,15 +37,25 @@ public class OrderManager : MonoBehaviour
 
     void Start()
     {
-        
-            if (itemDatabaseSO.orders.Count > 0)
+        NewOrders();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            NewOrders();
+        }
+    }
+    void NewOrders()
+    {
+        if (orderDatabaseSO.orders.Count > 0)
+        {
+            for (int i = 0; i < diningTables.Count; i++)
             {
-                for (int i = 0; i < diningTables.Count; i++)
-                {
-                    int randomOrder = Random.Range(0, itemDatabaseSO.orders.Count);
-                    diningTables[i].NewOrder(itemDatabaseSO.orders[randomOrder]);
-                }
+                
+                diningTables[i].NewOrder();
             }
-         
+        }
     }
 }

@@ -153,6 +153,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 359710274005348677}
+  - component: {fileID: 3788506749252462807}
+  - component: {fileID: 1440734965731851069}
+  - component: {fileID: 5331869234489393862}
   m_Layer: 0
   m_Name: Oven
   m_TagString: Untagged
@@ -179,6 +182,53 @@ Transform:
   - {fileID: 4021746039762378995}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3788506749252462807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725031063650036663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
+  itemHoldPoint: {fileID: 1973248141792066132}
+  indicator: {fileID: 5467281997873357486}
+  tableType: 4
+  workbenchType: 2
+  startItemType: 0
+  startIngridient: 0
+  startContainer: 0
+--- !u!114 &1440734965731851069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725031063650036663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89606a5904b738848952f11516d727e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorkbenchScript
+  workbenchName: 1
+  workbenchType: 2
+--- !u!114 &5331869234489393862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725031063650036663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c497381a2bc647142b2734d3efff30bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToggleActivationTable
+  tableActiveDisplay: {fileID: 106837409631664590}
+  tableInactiveDisplay: {fileID: 4162097702291647784}
 --- !u!1 &1973248141792066132
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,8 +382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4320450073341261992}
   - component: {fileID: 1516854115527611494}
-  - component: {fileID: 9167643885761755219}
-  - component: {fileID: 8032611042999243608}
+  - component: {fileID: 2647415559361902597}
   m_Layer: 0
   m_Name: Table Script
   m_TagString: Table
@@ -377,7 +426,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9167643885761755219
+--- !u!114 &2647415559361902597
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,26 +435,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2183998105842888114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e55d9016f2a30441bd3ee383de040e1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
-  itemHoldPoint: {fileID: 1973248141792066132}
-  indicator: {fileID: 5467281997873357486}
-  mainTableType: 4
---- !u!114 &8032611042999243608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2183998105842888114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c497381a2bc647142b2734d3efff30bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ToggleActivationTable
-  tableActiveDisplay: {fileID: 106837409631664590}
-  tableInactiveDisplay: {fileID: 4162097702291647784}
+  m_EditorClassIdentifier: Assembly-CSharp::TableColider
+  mainTableScript: {fileID: 3788506749252462807}
 --- !u!1 &2278905694902173355
 GameObject:
   m_ObjectHideFlags: 0
