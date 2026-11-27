@@ -11,10 +11,10 @@ PrefabInstance:
     - target: {fileID: 3066633770139386850, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b96e21a49bc77fc469c94fe9c92e76d3, type: 2}
+      objectReference: {fileID: 2100000, guid: 8b783f7ab2bbeb04f9f4ae8fd675abb6, type: 2}
     - target: {fileID: 3941924154638449452, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
       propertyPath: m_Name
-      value: Wheat
+      value: Burnt Wheat
       objectReference: {fileID: 0}
     - target: {fileID: 4907874470209530288, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56,10 +56,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5481164867418291080, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
+      propertyPath: ingridientID
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5589856526118351521, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
       propertyPath: itemID
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5589856526118351521, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
+      propertyPath: itemDatabaseSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 114b33f466272204285b7dacf2b83800, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

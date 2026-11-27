@@ -20,7 +20,6 @@ public class MainTableScript : MonoBehaviour
     [SerializeField] internal GameObject itemHoldPoint;
     [SerializeField] private GameObject indicator;
     [SerializeField] internal TableType tableType;
-    [SerializeField] internal WorkbenchType workbenchType;
     [Header("Start Item")]
     [SerializeField] private ItemType startItemType;
     [SerializeField] private IngridientID startIngridient;
