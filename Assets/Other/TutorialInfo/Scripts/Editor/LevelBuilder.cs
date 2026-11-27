@@ -7,15 +7,12 @@ public class BakeryLevelBuilder : EditorWindow
     private float gridSize = 1f;
     private float floorHeight = 0f;
     private int gridRadius = 10;
-
     private bool buildingEnabled = false;
     private bool showGrid = true;
-
     private int selectedPrefab = 0;
     private float rotation = 0f;
 
     private Transform objectParent;
-
     private List<GameObject> prefabs = new List<GameObject>();
 
     [MenuItem("Tools/Bakery Level Builder")]
@@ -38,23 +35,15 @@ public class BakeryLevelBuilder : EditorWindow
     {
         GUILayout.Label("Grid Settings", EditorStyles.boldLabel);
 
-        gridSize = Mathf.Max(0.1f,
-            EditorGUILayout.FloatField("Grid Size", gridSize));
+        gridSize = Mathf.Max(0.1f,EditorGUILayout.FloatField("Grid Size", gridSize));
+            
+        floorHeight = EditorGUILayout.FloatField("Floor Height", floorHeight);
+           
+        gridRadius = EditorGUILayout.IntSlider("Grid Radius", gridRadius, 1, 30);  
 
-        floorHeight = EditorGUILayout.FloatField(
-            "Floor Height", floorHeight);
+        showGrid = EditorGUILayout.Toggle("Show Grid", showGrid);
 
-        gridRadius = EditorGUILayout.IntSlider(
-            "Grid Radius", gridRadius, 1, 30);
-
-        showGrid = EditorGUILayout.Toggle(
-            "Show Grid", showGrid);
-
-        objectParent = (Transform)EditorGUILayout.ObjectField(
-            "Object Parent",
-            objectParent,
-            typeof(Transform),
-            true);
+        objectParent = (Transform)EditorGUILayout.ObjectField("Object Parent",objectParent,typeof(Transform),true);
 
         EditorGUILayout.Space();
 
@@ -64,25 +53,21 @@ public class BakeryLevelBuilder : EditorWindow
         {
             EditorGUILayout.BeginHorizontal();
 
-            if (GUILayout.Toggle(
-                selectedPrefab == i,
-                (i + 1).ToString(),
-                "Button",
-                GUILayout.Width(30)))
+            if (GUILayout.Toggle(selectedPrefab == i,(i + 1).ToString(),"Button",GUILayout.Width(30)))
+
             {
                 selectedPrefab = i;
             }
 
-            prefabs[i] = (GameObject)EditorGUILayout.ObjectField(
-                prefabs[i], typeof(GameObject), false);
-
+            prefabs[i] = (GameObject)EditorGUILayout.ObjectField(prefabs[i], typeof(GameObject), false);
+                
             if (GUILayout.Button("X", GUILayout.Width(25)))
             {
                 prefabs.RemoveAt(i);
 
-                selectedPrefab = Mathf.Clamp(
-                    selectedPrefab, 0,
-                    Mathf.Max(0, prefabs.Count - 1));
+                selectedPrefab = Mathf.Clamp(selectedPrefab, 0,Mathf.Max(0, prefabs.Count - 1));
+                    
+                    
 
                 EditorGUILayout.EndHorizontal();
                 break;
@@ -100,44 +85,33 @@ public class BakeryLevelBuilder : EditorWindow
 
         GUILayout.Label("Placement", EditorStyles.boldLabel);
 
-        EditorGUILayout.LabelField(
-            "Rotation", rotation + " degrees");
-
+        EditorGUILayout.LabelField("Rotation", rotation + " degrees");
+            
         if (GUILayout.Button("Rotate 90 Degrees"))
         {
             RotateObject();
         }
 
-        if (GUILayout.Button(buildingEnabled
-            ? "Disable Building"
-            : "Enable Building"))
+        if (GUILayout.Button(buildingEnabled ? "Disable Building" : "Enable Building"))
+            
         {
             buildingEnabled = !buildingEnabled;
         }
 
         if (objectParent == null)
         {
-            EditorGUILayout.HelpBox(
-                "Assign an Object Parent before building.",
-                MessageType.Warning);
+            EditorGUILayout.HelpBox("Assign an Object Parent before building.",MessageType.Warning);
         }
 
-        EditorGUILayout.HelpBox(
-            "Left Click: Place Object\n" +
-            "Right Click: Remove Object\n" +
-            "R: Rotate Object\n" +
-            "Escape: Disable Building\n" +
-            "Ctrl + Z: Undo",
-            MessageType.Info);
-
+        EditorGUILayout.HelpBox("Left Click: Place Object\n" + "Right Click: Remove Object\n" + "R: Rotate Object\n" + "Escape: Disable Building\n" + "Ctrl + Z: Undo",MessageType.Info);
+            
         SceneView.RepaintAll();
     }
 
     private void OnSceneGUI(SceneView sceneView)
     {
-        if (!buildingEnabled || Application.isPlaying)
-            return;
-
+        if (!buildingEnabled || Application.isPlaying) return;
+ 
         Event currentEvent = Event.current;
 
         if (currentEvent.type == EventType.KeyDown)
@@ -164,18 +138,14 @@ public class BakeryLevelBuilder : EditorWindow
         // Prevent normal Scene selection while building.
         if (currentEvent.type == EventType.Layout)
         {
-            HandleUtility.AddDefaultControl(
-                GUIUtility.GetControlID(FocusType.Passive));
+            HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
         }
 
         // Convert the mouse position into a world-space ray.
-        Ray ray = HandleUtility.GUIPointToWorldRay(
-            currentEvent.mousePosition);
-
+        Ray ray = HandleUtility.GUIPointToWorldRay(currentEvent.mousePosition);
+          
         // Create a horizontal placement plane.
-        Plane groundPlane = new Plane(
-            Vector3.up,
-            new Vector3(0f, floorHeight, 0f));
+        Plane groundPlane = new Plane(Vector3.up,new Vector3(0f, floorHeight, 0f));
 
         if (!groundPlane.Raycast(ray, out float distance))
             return;
@@ -191,20 +161,15 @@ public class BakeryLevelBuilder : EditorWindow
 
         GameObject occupiedObject = FindObject(snappedPosition);
 
-        bool validPrefab =
-            selectedPrefab >= 0 &&
-            selectedPrefab < prefabs.Count &&
-            prefabs[selectedPrefab] != null &&
-            PrefabUtility.IsPartOfPrefabAsset(
-                prefabs[selectedPrefab]);
-
+        bool validPrefab = selectedPrefab >= 0 && selectedPrefab < prefabs.Count && prefabs[selectedPrefab] != null && PrefabUtility.IsPartOfPrefabAsset(prefabs[selectedPrefab]);
+        
         bool canPlace = occupiedObject == null && validPrefab;
 
         DrawPreview(snappedPosition, canPlace);
 
         // Allow Alt + mouse for Scene camera navigation.
-        if (!currentEvent.alt &&
-            currentEvent.type == EventType.MouseDown)
+        if (!currentEvent.alt && currentEvent.type == EventType.MouseDown)
+           
         {
             // Left-click to place.
             if (currentEvent.button == 0)
@@ -233,27 +198,20 @@ public class BakeryLevelBuilder : EditorWindow
 
     private Vector3 SnapToGrid(Vector3 position)
     {
-        return new Vector3(
-            Mathf.Round(position.x / gridSize) * gridSize,
-            floorHeight,
-            Mathf.Round(position.z / gridSize) * gridSize
-        );
+        return new Vector3(Mathf.Round(position.x / gridSize) * gridSize,floorHeight,Mathf.Round(position.z / gridSize) * gridSize);
     }
 
     private void PlaceObject(Vector3 position)
     {
         GameObject prefab = prefabs[selectedPrefab];
 
-        GameObject newObject = (GameObject)
-            PrefabUtility.InstantiatePrefab(prefab, objectParent);
-
+        GameObject newObject = (GameObject) PrefabUtility.InstantiatePrefab(prefab, objectParent);
+            
         newObject.transform.position = position;
 
-        newObject.transform.rotation =
-            Quaternion.Euler(0f, rotation, 0f);
-
-        Undo.RegisterCreatedObjectUndo(
-            newObject, "Place Bakery Object");
+        newObject.transform.rotation = Quaternion.Euler(0f, rotation, 0f);
+            
+        Undo.RegisterCreatedObjectUndo(newObject, "Place Bakery Object");  
     }
 
     private GameObject FindObject(Vector3 position)
@@ -288,25 +246,9 @@ public class BakeryLevelBuilder : EditorWindow
         {
             float offset = i * gridSize - half;
 
-            Handles.DrawLine(
-                new Vector3(
-                    center.x + offset,
-                    height,
-                    center.z - extent),
-                new Vector3(
-                    center.x + offset,
-                    height,
-                    center.z + extent));
+            Handles.DrawLine(new Vector3(center.x + offset, height, center.z - extent), new Vector3(center.x + offset, height, center.z + extent));
 
-            Handles.DrawLine(
-                new Vector3(
-                    center.x - extent,
-                    height,
-                    center.z + offset),
-                new Vector3(
-                    center.x + extent,
-                    height,
-                    center.z + offset));
+            Handles.DrawLine(new Vector3(center.x - extent, height, center.z + offset), new Vector3(center.x + extent, height, center.z + offset)); 
         }
     }
 
@@ -314,22 +256,13 @@ public class BakeryLevelBuilder : EditorWindow
     {
         Handles.color = canPlace ? Color.green : Color.red;
 
-        Vector3 previewPosition =
-            position + Vector3.up * 0.03f;
-
-        Handles.DrawWireCube(
-            previewPosition,
-            new Vector3(gridSize, 0.02f, gridSize));
-
+        Vector3 previewPosition = position + Vector3.up * 0.03f;
+            
+        Handles.DrawWireCube(previewPosition, new Vector3(gridSize, 0.02f, gridSize));
+        
         // Show which direction the prefab will face.
-        Quaternion previewRotation =
-            Quaternion.Euler(0f, rotation, 0f);
+        Quaternion previewRotation = Quaternion.Euler(0f, rotation, 0f);
 
-        Handles.ArrowHandleCap(
-            0,
-            previewPosition + Vector3.up * 0.1f,
-            previewRotation,
-            gridSize * 0.45f,
-            EventType.Repaint);
+        Handles.ArrowHandleCap(0, previewPosition + Vector3.up * 0.1f, previewRotation, gridSize * 0.45f, EventType.Repaint);
     }
 }
