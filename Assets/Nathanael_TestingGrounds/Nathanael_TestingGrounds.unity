@@ -276,6 +276,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2546010761789850233, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
+      propertyPath: tableType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2546010761789850233, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
       propertyPath: masterManager
       value: 
       objectReference: {fileID: 1991051464}
@@ -322,6 +326,14 @@ PrefabInstance:
     - target: {fileID: 4408844181721023240, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
       propertyPath: spawnItem
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4408844181721023240, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
+      propertyPath: spawnItemType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4408844181721023240, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
+      propertyPath: spawnContainerID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5398940929559467601, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
       propertyPath: spawnItem
@@ -735,6 +747,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1991051462}
     - target: {fileID: 4790953165676304190, guid: 5a696e5afdbfc1747a47e6af2fbb7e31, type: 3}
+      propertyPath: tableType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4790953165676304190, guid: 5a696e5afdbfc1747a47e6af2fbb7e31, type: 3}
       propertyPath: masterManager
       value: 
       objectReference: {fileID: 1991051464}
@@ -840,9 +856,17 @@ PrefabInstance:
       value: Stove
       objectReference: {fileID: 0}
     - target: {fileID: 8343464255525549975, guid: 4d11abb0eafd8cc429e37901c3bcf192, type: 3}
+      propertyPath: tableType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343464255525549975, guid: 4d11abb0eafd8cc429e37901c3bcf192, type: 3}
       propertyPath: masterManager
       value: 
       objectReference: {fileID: 1991051464}
+    - target: {fileID: 8343464255525549975, guid: 4d11abb0eafd8cc429e37901c3bcf192, type: 3}
+      propertyPath: workbenchType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1056,7 +1080,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0f98cb72c6e61e64bb1c36036f349ed6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1225b99c0075114180e01e7aee53ced, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1311,9 +1335,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1802500593734940847, guid: a7d87b89f4df7c644ad4b53e988897de, type: 3}
+      propertyPath: tableType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1802500593734940847, guid: a7d87b89f4df7c644ad4b53e988897de, type: 3}
       propertyPath: masterManager
       value: 
       objectReference: {fileID: 1991051464}
+    - target: {fileID: 1802500593734940847, guid: a7d87b89f4df7c644ad4b53e988897de, type: 3}
+      propertyPath: workbenchType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1862609906472858983, guid: a7d87b89f4df7c644ad4b53e988897de, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4
@@ -1372,6 +1404,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2546010761789850233, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
+      propertyPath: tableType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2546010761789850233, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
       propertyPath: masterManager
       value: 
       objectReference: {fileID: 1991051464}
@@ -1418,6 +1454,14 @@ PrefabInstance:
     - target: {fileID: 4408844181721023240, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
       propertyPath: spawnItem
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4408844181721023240, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
+      propertyPath: spawnItemType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4408844181721023240, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
+      propertyPath: spawnIngridientID
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6533148905749233575, guid: bd805356f53cdbd40813221c35eeb1e0, type: 3}
       propertyPath: m_Name
@@ -1480,6 +1524,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 4186887194004271658, guid: 951a04fdad7039241891ca3722e1cf9e, type: 3}
+      propertyPath: itemDatabaseSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 114b33f466272204285b7dacf2b83800, type: 2}
+    - target: {fileID: 4186887194004271658, guid: 951a04fdad7039241891ca3722e1cf9e, type: 3}
+      propertyPath: orderDatabaseSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 43751e90fa026ca449d5dd87f42724f5, type: 2}
+    - target: {fileID: 4186887194004271658, guid: 951a04fdad7039241891ca3722e1cf9e, type: 3}
+      propertyPath: recipeDatabaseSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 66e7919594cd3f54781b38b45465d88c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1542,9 +1598,17 @@ PrefabInstance:
       value: Oven
       objectReference: {fileID: 0}
     - target: {fileID: 9167643885761755219, guid: 1efc5424c5dcee64190caf0b4167e78f, type: 3}
+      propertyPath: tableType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9167643885761755219, guid: 1efc5424c5dcee64190caf0b4167e78f, type: 3}
       propertyPath: masterManager
       value: 
       objectReference: {fileID: 1991051464}
+    - target: {fileID: 9167643885761755219, guid: 1efc5424c5dcee64190caf0b4167e78f, type: 3}
+      propertyPath: workbenchType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1558,6 +1622,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 630448900392101421, guid: d9620145abf02d3438df6e0687525a1f, type: 3}
+      propertyPath: tableType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 630448900392101421, guid: d9620145abf02d3438df6e0687525a1f, type: 3}
       propertyPath: masterManager
       value: 

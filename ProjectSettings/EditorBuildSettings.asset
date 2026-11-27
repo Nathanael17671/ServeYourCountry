@@ -5,15 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Multiplayer_David/Scenes/LobbyScene.unity
     guid: c3d65541f5728ec46984186bb5557600
-  - enabled: 1
+  - enabled: 0
     path: Assets/Multiplayer_David/Scenes/CharacterSelectScene.unity
     guid: 0bfd3ef747bb09a4c8f3b001d692c27e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Multiplayer_David/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Serve_My_Resturaunt.unity
+    guid: b0b871c7bf3fcc84eaa976b92ba23bf6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

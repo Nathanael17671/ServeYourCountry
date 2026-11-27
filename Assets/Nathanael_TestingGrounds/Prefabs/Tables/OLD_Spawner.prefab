@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 6515590058719099852}
   - component: {fileID: 2546010761789850233}
   - component: {fileID: 4408844181721023240}
+  - component: {fileID: 6716550254300698559}
   m_Layer: 0
   m_Name: Table Script
   m_TagString: Table
@@ -322,10 +323,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abc8c9900ffdb24f98dae53ccf18156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainTableScript
-  masterManager: {fileID: 0}
   itemHoldPoint: {fileID: 1681747402140272551}
   indicator: {fileID: 4144610486017717960}
-  mainTableType: 1
+  tableType: 0
+  startItemType: 0
+  startIngridient: 0
+  startContainer: 0
 --- !u!114 &4408844181721023240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +341,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bdec8ba43da0f844b9186ce9d1d7dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerTable
-  spawnItem: 0
+  spawnItemType: 0
+  spawnIngridientID: 0
+  spawnContainerID: 0
+--- !u!114 &6716550254300698559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6208397092666919966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e55d9016f2a30441bd3ee383de040e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TableColider
+  mainTableScript: {fileID: 2546010761789850233}
 --- !u!1 &6533148905749233575
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4157463260971189449}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: OLD_Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -366,9 +366,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4907874470209530288}
   - component: {fileID: 7016013086451103954}
-  - component: {fileID: 5408604699063038617}
+  - component: {fileID: 6574298867131691380}
   m_Layer: 0
-  m_Name: Plate
+  m_Name: OLD_Plate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,11 +403,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2402b1fc9493e6645a97a9deb9b21775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Items
-  itemID: 1
+  itemType: 2
   itemDatabaseSO: {fileID: 11400000, guid: 114b33f466272204285b7dacf2b83800, type: 2}
   fillImage: {fileID: 3013584008105734008}
   progressBar: {fileID: 2399821172657480272}
---- !u!114 &5408604699063038617
+--- !u!114 &6574298867131691380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -416,12 +416,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3941924154638449452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e8e90221db54e949b9ff50bbfdef0b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 430ac6b67ca484345bfd3968b9cf1c81, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Plate
-  itemTypeList: 
-  itemGameobjectList: []
-  itemDisplayPoints:
+  m_EditorClassIdentifier: Assembly-CSharp::ContainerScript
+  containerID: 1
+  ingridientDisplayPoints:
   - {fileID: 4466808521042443412}
   - {fileID: 4717743840774364816}
   - {fileID: 8717664720966004248}
