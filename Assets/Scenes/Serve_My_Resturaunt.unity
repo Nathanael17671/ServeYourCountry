@@ -243,7 +243,6 @@ GameObject:
   m_Component:
   - component: {fileID: 80769797}
   - component: {fileID: 80769800}
-  - component: {fileID: 80769799}
   - component: {fileID: 80769798}
   m_Layer: 0
   m_Name: Overlay
@@ -311,14 +310,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!81 &80769799
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 80769796}
-  m_Enabled: 1
 --- !u!20 &80769800
 Camera:
   m_ObjectHideFlags: 0
