@@ -5,67 +5,77 @@ public enum TableType
     Normal,
     Spawner,
     Trash,
-    PlayerInteraction,
-    ToggleActivation,
-    AlwaysActive,
-    Delivery
+    Delivery,
+    Workbench
 }
+
 public class MainTableScript : MonoBehaviour
 {
     //[Header("Table References")]
     internal MasterManager masterManager;
-    
+    internal TableValidityChecker tableValidityChecker;
+    internal RecipeChecker recipeChecker;
     
     [Header("Table Settings")]
     [SerializeField] internal GameObject itemHoldPoint;
     [SerializeField] private GameObject indicator;
-    [SerializeField] internal TableType mainTableType;
+    [SerializeField] internal TableType tableType;
+    [SerializeField] internal WorkbenchType workbenchType;
+    [Header("Start Item")]
+    [SerializeField] private ItemType startItemType;
+    [SerializeField] private IngridientID startIngridient;
+    [SerializeField] private ContainerID startContainer;
     
     //[Header("Table Inventory")]
-    internal GameObject heldTableItem;
-    internal Items heldTableItemScript;
+    internal GameObject tableItemGameobject;
+    internal ItemManager tableItemScript;
 
-    internal TableValidityChecker tableValidityChecker;
-    private SpawnerTable spawnerTableScript;
-    private TrashTable trashTableScript;
-    private ToggleActivationTable toggleActivationTableScript;
-    private PlayerInteractionTable playerInteractionTableScript;
-    private AlwaysActiveTable alwaysActiveTableScript;
-    private DiningTable diningTableScript;
+    internal WorkbenchScript workbenchScript;
 
     void Awake()
     {
         masterManager = FindAnyObjectByType<MasterManager>();
+        tableValidityChecker = masterManager.tableValidityChecker;
+        recipeChecker = masterManager.recipeChecker;
     }
 
     void Start()
     {
         SetIndicatorActive(false);
-        tableValidityChecker = masterManager.tableValidityChecker;
 
-        switch (mainTableType)
-        {
-            case TableType.Normal:
-                break;
-            case TableType.Spawner:
-                spawnerTableScript = GetComponent<SpawnerTable>();
-                break;
-            case TableType.Trash:
-                trashTableScript = GetComponent<TrashTable>();
-                break;
-            case TableType.PlayerInteraction:
-                playerInteractionTableScript = GetComponent<PlayerInteractionTable>();
-                break;
-            case TableType.ToggleActivation:
-                toggleActivationTableScript = GetComponent<ToggleActivationTable>();
-                break;
-            case TableType.AlwaysActive:
-                alwaysActiveTableScript = GetComponent<AlwaysActiveTable>();
-                break;
-            case TableType.Delivery:
-                diningTableScript = GetComponent<DiningTable>();
-                break;
+        if (tableType == TableType.Workbench)
+        {    
+            workbenchScript = GetComponent<WorkbenchScript>();          
         }
+        if (startItemType != ItemType.None) SpawnStartItem();
+    }
+
+    void SpawnStartItem()
+    {
+        GameObject spawnPrefab = null;
+        switch (startItemType)
+        {
+            case ItemType.Container:
+                spawnPrefab = masterManager.itemDatabaseSO.GetContainer(startContainer).Prefab;
+            break;
+            case ItemType.Ingridient:
+                spawnPrefab = masterManager.itemDatabaseSO.GetIngridient(startIngridient).Prefab;
+            break;
+        }
+        if (spawnPrefab == null)
+        {
+            Debug.LogError("Item in database is missing prefab OR startItemType:" + startItemType + " / startIngridientID: " + startIngridient + " / startContainerID: " + startContainer + " is incorrect");
+        }
+        //Remove current Item
+        Destroy(tableItemGameobject);
+        tableItemGameobject = null;
+        tableItemScript = null;
+
+        //Create new Item
+        tableItemGameobject = Instantiate(spawnPrefab, itemHoldPoint.transform.position, Quaternion.identity);
+        tableItemGameobject.transform.parent = itemHoldPoint.transform;
+        tableItemScript = tableItemGameobject.GetComponent<ItemManager>();
+        tableItemScript.currentTableScript = this;
     }
 
     public void SetIndicatorActive(bool isActive)
@@ -75,127 +85,138 @@ public class MainTableScript : MonoBehaviour
 
     public bool HasItemOnTable()
     {
-        if (heldTableItem == null || heldTableItemScript == null)
+        if (tableItemGameobject == null || tableItemScript == null)
         {
             return false;
         }
         return true;
     }
 
-    public void Pickup()
+    public GameObject Pickup()
     {
+        if (tableItemScript.itemType == ItemType.Container)
+        {
+            GameObject ingridientGameobject = tableItemScript.containerScript.TakeOutFirstAvailableItem();
+            if (ingridientGameobject != null)
+            {
+                ItemManager ingridientScript = ingridientGameobject.GetComponent<ItemManager>();
+                ingridientScript.UpdateRecipeData(null);
+                ingridientScript.ResetTimers();
+                ingridientScript.currentTableScript = null;
+                return ingridientGameobject;
+            }
+        }
+
         //Take item from table
-        heldTableItem.transform.parent = null;
-        heldTableItem = null;
-        heldTableItemScript.ResetTimers();
-        if (heldTableItemScript != null) heldTableItemScript.currentTableScript = null;
-        heldTableItemScript = null;
+        tableItemGameobject.transform.parent = null;
+        GameObject pickedUpItem = tableItemGameobject;
+        tableItemGameobject = null;
+
+        tableItemScript.UpdateRecipeData(null);
+        tableItemScript.ResetTimers();
+        tableItemScript.currentTableScript = null;
+        tableItemScript = null;
         
         //Spawn new item
-        if (mainTableType == TableType.Spawner)
+        if (tableType == TableType.Spawner)
         {
-            spawnerTableScript.SpawnNewItem();
+            GetComponent<SpawnerTable>().SpawnNewItem();
         }
+        return pickedUpItem;
     }
 
     public void PutDownItem(GameObject item, int action)
     {
         // 0 = Put on Table,
-        // 1 = Move to Plate, put on Table, 
+        // 1 = Move to Container, put on Table, 
         // 2 = Combine Items, and put on Table
 
-        Items itemScript = item.GetComponent<Items>();
+        ItemManager itemScript = item.GetComponent<ItemManager>();
         
         
         switch (action)
         {
             case 0:
-                heldTableItem = item;
+                tableItemGameobject = item;
             break;
             case 1: //Is it a Plate
-                if (heldTableItemScript.itemData.IsAPlate)
+                if (tableItemScript.itemType == ItemType.Container)
                 {
-                    Plate plate = heldTableItemScript.plateScript;
-                    plate.AddItem(item);
+                    ContainerScript containerScript = tableItemScript.containerScript;
+                    containerScript.AddItem(item);
                 } 
-                else if (itemScript.itemData.IsAPlate)
+                else if (itemScript.itemType == ItemType.Container)
                 {
-                    Plate plate = itemScript.plateScript;
-                    plate.AddItem(heldTableItem);
-                    heldTableItem = item;
+                    ContainerScript containerScript = itemScript.containerScript;
+                    containerScript.AddItem(tableItemGameobject);
+                    tableItemGameobject = item;
                 } 
             break;
             case 2: //Combine Ingridients
-                ItemID combinationResult = tableValidityChecker.CombinationRecipeCheck(itemScript, heldTableItemScript);
-                Destroy(heldTableItem);
-                heldTableItem = null;
-                heldTableItemScript = null;
+                IngridientID combinationResult = masterManager.recipeChecker.CombinationRecipeCheck(itemScript.ingridientScript, tableItemScript.ingridientScript);
+                Destroy(tableItemGameobject);
+                tableItemGameobject = null;
+                tableItemScript = null;
                 Destroy(item);
-                GameObject newItemPrefab = masterManager.itemDatabaseSO.GetItem(combinationResult).Prefab;
-                heldTableItem = Instantiate(newItemPrefab, itemHoldPoint.transform.position, Quaternion.identity);
+                GameObject newItemPrefab = masterManager.itemDatabaseSO.GetIngridient(combinationResult).Prefab;
+                tableItemGameobject = Instantiate(newItemPrefab, itemHoldPoint.transform.position, Quaternion.identity);
             break;
         }
         //Place item
-        heldTableItem.transform.parent = itemHoldPoint.transform;
-        heldTableItem.transform.localPosition = Vector3.zero;
-        heldTableItem.transform.localRotation = Quaternion.identity;
+        tableItemGameobject.transform.parent = itemHoldPoint.transform;
+        tableItemGameobject.transform.localPosition = Vector3.zero;
+        tableItemGameobject.transform.localRotation = Quaternion.identity;
         //Get item script
-        heldTableItemScript = heldTableItem.GetComponent<Items>();
-        heldTableItemScript.currentTableScript = this;
-
-        //Destroy item if bin
-        if (mainTableType == TableType.Trash)
+        tableItemScript = tableItemGameobject.GetComponent<ItemManager>();
+        tableItemScript.currentTableScript = this;
+        if (tableType == TableType.Workbench)
         {
-            Destroy(heldTableItem);
-            heldTableItem = null;
-            heldTableItemScript = null;
+            workbenchScript.CheckHeldItemRecipe();
+        }
+            
+        //Destroy item if bin
+        if (tableType == TableType.Trash)
+        {
+            Destroy(tableItemGameobject);
+            tableItemGameobject = null;
+            tableItemScript = null;
             return;
         }
 
-        if (heldTableItemScript.itemData.IsAPlate)
+        if (tableType == TableType.Delivery && tableItemScript.itemType == ItemType.Container)
         {
-            if (mainTableType == TableType.Delivery)
+            if (!tableItemScript.containerScript.containerData.isForDelivery)
+                return;
+            DiningTable diningTableScript = GetComponent<DiningTable>();
+            if (diningTableScript.MatchingOrder(tableItemScript.containerScript.ingridientIDList))
             {
-                Plate plate = heldTableItemScript.plateScript;
-                if (diningTableScript.MatchingOrder(plate.itemTypeList))
-                {
-                    Debug.Log("Matching");
-                    diningTableScript.OrderFulfilled(heldTableItem);
-                    heldTableItem = null;
-                    heldTableItemScript = null;
-                    return;
-                }
-                else
-                {
-                    //Debug.Log("Not Matching");
-                }
+                Debug.Log("Matching");
+                diningTableScript.OrderFulfilled(tableItemGameobject);
+                tableItemGameobject = null;
+                tableItemScript = null;
+                return;
+            }
+            else
+            {
+                //Debug.Log("Not Matching");
             }
         }
     }
 
-    public void ToggleActivation()
+    public void InteractPress()
     {
-        if (!HasItemOnTable())
-        {
+        if (tableType != TableType.Workbench)
             return;
-        }
-        if (mainTableType == TableType.ToggleActivation)
-        {
-            toggleActivationTableScript.ToggleProsses();
-        }
+        workbenchScript.ToggleActivation();
     }
 
-    public void ProgressPlayerInteraction()
+    public void InteractHold()
     {
+        if (tableType != TableType.Workbench)
+            return;
         if (!HasItemOnTable())
             return;
-        if (!heldTableItemScript.itemData.usedInPlayerInteractionTable)
-            return;
-        if (mainTableType == TableType.PlayerInteraction)
-        {
-            playerInteractionTableScript.ProssesItemProgress();
-        }
-
+        workbenchScript.ProssesWorkbench();
     }
 
 }

@@ -1,7 +1,7 @@
-using Unity.Netcode;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ToggleActivationTable : NetworkBehaviour
+public class ToggleActivationTable : MonoBehaviour
 {
     private MainTableScript mainTableScript;
     internal bool tableIsActive = false;
@@ -37,13 +37,10 @@ public class ToggleActivationTable : NetworkBehaviour
 
     void ProssesToggleOn()
     {
-        if (mainTableScript.heldTableItemScript.itemData.usedInToggleActivationTable)
-        {
-            tableActiveDisplay.SetActive(true);
-            tableInactiveDisplay.SetActive(false);
-            tableIsActive = true;
-            return;
-        }
+        tableActiveDisplay.SetActive(true);
+        tableInactiveDisplay.SetActive(false);
+        tableIsActive = true;
+        mainTableScript.workbenchScript.canPickupPutDown = false;
     }
 
 
@@ -52,20 +49,19 @@ public class ToggleActivationTable : NetworkBehaviour
         tableActiveDisplay.SetActive(false);
         tableInactiveDisplay.SetActive(true);
         tableIsActive = false;
+        mainTableScript.workbenchScript.canPickupPutDown = true;
     }
 
     void Update()
     {
-        if (!tableIsActive)
-        {
-            return;
-        }
-        if (!mainTableScript.heldTableItemScript.itemData.usedInToggleActivationTable)
+        if (!tableIsActive) return;
+        if (!mainTableScript.HasItemOnTable()) return;
+        if (!mainTableScript.workbenchScript.hasValidRecipe)
         {
             ProssesToggleOff();
             return;
         }
-        mainTableScript.heldTableItemScript.currentToggleActivationTime += Time.deltaTime;
-        mainTableScript.heldTableItemScript.UpdateProgressBar(mainTableScript.mainTableType);        
+        mainTableScript.tableItemScript.currentTime += Time.deltaTime;
+        mainTableScript.tableItemScript.UpdateProgressBar(WorkbenchType.ToggleActivation);        
     }
 }

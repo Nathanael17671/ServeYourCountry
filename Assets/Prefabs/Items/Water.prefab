@@ -8,13 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 171201506325420041, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 171201506325420041, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 171201506325420041, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 171201506325420041, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.125
+      objectReference: {fileID: 0}
     - target: {fileID: 3066633770139386850, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b96e21a49bc77fc469c94fe9c92e76d3, type: 2}
+      objectReference: {fileID: 2100000, guid: a464875100fae1342be00c7c1f5a52ee, type: 2}
     - target: {fileID: 3941924154638449452, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
       propertyPath: m_Name
-      value: Wheat
+      value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 4907874470209530288, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -56,51 +72,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5589856526118351521, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
-      propertyPath: itemID
-      value: 12
+    - target: {fileID: 5481164867418291080, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
+      propertyPath: ingridientID
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5589856526118351521, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
-      propertyPath: itemDatabaseSO
-      value: 
-      objectReference: {fileID: 11400000, guid: b42ad6d73a7c61242b4c1baa523d467b, type: 2}
+      propertyPath: itemID
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3941924154638449452, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: -6888639008351895398}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
---- !u!1 &3414891189287419699 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3941924154638449452, guid: f824765a804c7064c88eb60c28bdf1bf, type: 3}
-  m_PrefabInstance: {fileID: 1860169524550550559}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-6888639008351895398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3414891189287419699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 1306107784
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  m_InScenePlacedDisabledByDefault: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  m_InScenePlaced: 0
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0

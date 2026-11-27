@@ -7,15 +7,14 @@ public class PlayerHands : NetworkBehaviour
     public GameObject itemHoldPoint;
     private Collider currentTableCollider;
     private MainTableScript tableScript;
-    private Items heldItemScript;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Table"))
         {
             currentTableCollider = other;
-            tableScript = currentTableCollider.GetComponent<MainTableScript>();
-            other.GetComponent<MainTableScript>().SetIndicatorActive(true);
+            tableScript = currentTableCollider.GetComponent<TableColider>().mainTableScript;
+            other.GetComponent<TableColider>().mainTableScript.SetIndicatorActive(true);
         }
     }
 
@@ -25,7 +24,7 @@ public class PlayerHands : NetworkBehaviour
         {
             currentTableCollider = null;
             tableScript = null;
-            other.GetComponent<MainTableScript>().SetIndicatorActive(false);
+            other.GetComponent<TableColider>().mainTableScript.SetIndicatorActive(false);
         }
     }
 
@@ -61,8 +60,7 @@ public class PlayerHands : NetworkBehaviour
             if (tableScript.tableValidityChecker.CanPickup(tableScript))
             {
                 //Move item from table to hands
-                GameObject newHandItem = tableScript.heldTableItem;
-                tableScript.Pickup();
+                GameObject newHandItem = tableScript.Pickup();
                 AddItemToHands(newHandItem);
             }
         }
@@ -97,8 +95,7 @@ public class PlayerHands : NetworkBehaviour
                 case 4:
                     RemoveItemFromHands();
                     tableScript.PutDownItem(newItem,1);
-                    newItem = tableScript.heldTableItem;
-                    tableScript.Pickup();
+                    newItem = tableScript.Pickup();
                     AddItemToHands(newItem);
                     //Debug.Log("Can pick up. PLATE!");
                 break;
@@ -110,8 +107,7 @@ public class PlayerHands : NetworkBehaviour
                 case 6:
                     RemoveItemFromHands();
                     tableScript.PutDownItem(newItem,2);
-                    newItem = tableScript.heldTableItem;
-                    tableScript.Pickup();
+                    newItem = tableScript.Pickup();
                     AddItemToHands(newItem);
                     //Debug.Log("Can pick up. Combination");
                 break;
@@ -121,9 +117,9 @@ public class PlayerHands : NetworkBehaviour
 
     void RemoveItemFromHands()
     {
+        
         heldItem.transform.parent = null;
         heldItem = null;
-        heldItemScript = null;
     }
     
     void AddItemToHands(GameObject item)
@@ -132,16 +128,15 @@ public class PlayerHands : NetworkBehaviour
         heldItem.transform.position = itemHoldPoint.transform.position;
         heldItem.transform.rotation = itemHoldPoint.transform.rotation;
         heldItem.transform.parent = itemHoldPoint.transform;
-        heldItemScript = heldItem.GetComponent<Items>();
     }
 
     void UsePress()
     {
-        tableScript.ToggleActivation();
+        tableScript.InteractPress();
     }
 
     void UseHold()
     {
-        tableScript.ProgressPlayerInteraction();
+        tableScript.InteractHold();
     }
 }

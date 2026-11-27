@@ -3,26 +3,22 @@ using UnityEngine;
 public class TableValidityChecker : MonoBehaviour
 {
     [SerializeField] internal MasterManager masterManager;
-    private ItemDatabaseSO itemDatabaseSO;
-
-    void Awake()
-    {
-        itemDatabaseSO = masterManager.itemDatabaseSO;
-    }
     
     public bool CanPickup(MainTableScript currentTableScript)
     {
-        TableType mainTableTypeCheck = currentTableScript.mainTableType;
+        TableType mainTableTypeCheck = currentTableScript.tableType;
         //Table type check
         switch (mainTableTypeCheck)
             {
                 case TableType.Trash:
                     Debug.Log("Cannot pick up item from a " + mainTableTypeCheck + "!");
                     return false;
-                case TableType.ToggleActivation:
-                    ToggleActivationTable toggleActivationTable = currentTableScript.GetComponent<ToggleActivationTable>();
-                    if (toggleActivationTable.tableIsActive)
+                case TableType.Workbench:
+                    WorkbenchScript workbenchScript = currentTableScript.GetComponent<WorkbenchScript>();
+                    if (!workbenchScript.canPickupPutDown)
+                    {
                         return false;
+                    }
                 break;
             }
         //Is item on table?
@@ -36,70 +32,41 @@ public class TableValidityChecker : MonoBehaviour
 
     public int CanPutDown(MainTableScript currentTableScript, GameObject handItem)
     {
+        
         // 0 = Do Nothing, 
         // 1 = Put on Table,
         // 2 = Put in Hand (Not in use),
-        // 3 = Move to Plate, put on Table, 
-        // 4 = Move to Plate, put in Hand
+        // 3 = Move to Container, put on Table, 
+        // 4 = Move to Container, put in Hand
         // 5 = Combine Items, and put on Table
         // 6 = Combine Items, and put in Hands
-        TableType mainTableTypeCheck = currentTableScript.mainTableType;
-        Items handItemScript = handItem.GetComponent<Items>();
+        TableType currentTableType = currentTableScript.tableType;
+        ItemManager handItemScript = handItem.GetComponent<ItemManager>();
 
-        //Is there a plate in hand
-        bool isThereAPlate = false;
-        Plate plate = null;
-        if (handItemScript.itemData.IsAPlate) //We need it outside for Bin
+        if (currentTableType == TableType.Workbench)
         {
-            plate = handItemScript.plateScript;
-            isThereAPlate = true;
+            if (!currentTableScript.workbenchScript.canPickupPutDown) return 0;
         }
-
+        
         //Table type check
         if (currentTableScript.HasItemOnTable()) //There is something in both the hands and on the table
         {   
-            if (isThereAPlate) //Test if we can move item from table into hand plate
+            //Check Container Transfer:
+            int containerResult = CanPlateThisItem(handItemScript, currentTableScript);
+            if (containerResult == 1)
             {
-                if (plate.CanAddItem(currentTableScript.heldTableItemScript))
-                {
-                    if (CanIPlaceItemOnTable(ItemID.Plate, mainTableTypeCheck))
-                    {
-                        return 3;
-                    }
-                    else
-                    {
-                        return 4;
-                    }
-                }
-                else
-                {
-                    return 0;
-                }
+                return 3;
             } 
-            else if (currentTableScript.heldTableItemScript.itemData.IsAPlate) //Is there a plate on table
+            else if (containerResult == 2)
             {
-                plate = currentTableScript.heldTableItemScript.plateScript;
-                if (plate.CanAddItem(handItemScript))
-                {
-                    if (CanIPlaceItemOnTable(ItemID.Plate, mainTableTypeCheck))
-                    {
-                        return 3;
-                    }
-                    else
-                    {
-                        return 4;
-                    }
-                }
-                else
-                {
-                    return 0;
-                }
+                return 4;
             }
-
-            ItemID combinationRecipeCheck = CombinationRecipeCheck(handItemScript, currentTableScript.heldTableItemScript);
-            if (combinationRecipeCheck != ItemID.None)
+            
+            //Check Combination Recipe
+            IngridientID combinationRecipeResult = masterManager.recipeChecker.CombinationRecipeCheck(handItemScript.ingridientScript, currentTableScript.tableItemScript.ingridientScript);
+            if (combinationRecipeResult != IngridientID.None)
             {
-                if (CanIPlaceItemOnTable(combinationRecipeCheck, mainTableTypeCheck))
+                if (CheckPlacementData(ItemType.Ingridient, combinationRecipeResult, ContainerID.None, currentTableScript))
                 {
                     return 5;
                 }
@@ -108,35 +75,31 @@ public class TableValidityChecker : MonoBehaviour
                     return 6;
                 }
             }
-
-            switch (mainTableTypeCheck)
+            
+            switch (currentTableType) // Check Other Table Functions
             {
-                case TableType.Normal:
-                    break;
                 case TableType.Spawner:
                     SpawnerTable spawnerTable = currentTableScript.GetComponent<SpawnerTable>();
-                    if (handItemScript.itemID == spawnerTable.spawnItem)
+                    if (handItemScript.itemType == spawnerTable.spawnItemType && (
+                        spawnerTable.spawnItemType == ItemType.Ingridient ? 
+                            handItemScript.ingridientScript.ingridientID == spawnerTable.spawnIngridientID : 
+                            handItemScript.containerScript.containerID == spawnerTable.spawnContainerID
+                            ))
                     {
-                        Destroy(currentTableScript.heldTableItem);
-                        currentTableScript.heldTableItem = null;
+                        if (handItemScript.itemType == ItemType.Container) //Dont return Container with items in it to spawner
+                        {
+                            ContainerScript container = handItemScript.containerScript;
+                            if (!container.IsEmpty())
+                            {
+                                return 0;
+                            }
+                        }
+                        Destroy(currentTableScript.tableItemGameobject);
+                        currentTableScript.tableItemGameobject = null;
                         return 1;
                     }
-                    Debug.Log("Cannot put down "+ handItemScript.itemID +" item on a "+ spawnerTable.spawnItem +" Spawner!");
-                    return 0;
-                case TableType.Trash:
-                    Debug.LogError("Bin should NOT have an item in it");
-                    return 0;
-                case TableType.PlayerInteraction:
-                    break;
-                case TableType.ToggleActivation:
-                    ToggleActivationTable toggleActivationTable = currentTableScript.GetComponent<ToggleActivationTable>();
-                    if (toggleActivationTable.tableIsActive)
-                        return 0;
-                    break;
-                case TableType.AlwaysActive:
-                    break;
-                case TableType.Delivery:
-                    break;
+                    Debug.Log("Cannot put down this item on the Spawner!");
+                return 0;
             }
 
             Debug.Log("Table is full");
@@ -144,117 +107,108 @@ public class TableValidityChecker : MonoBehaviour
         } 
         else //There is nothing on the table, and something in the hands
         {
-            if (!CanIPlaceItemOnTable(handItemScript.itemID, mainTableTypeCheck))
+            if (handItemScript.itemType == ItemType.Ingridient ? 
+                !CheckPlacementData(handItemScript.itemType, handItemScript.ingridientScript.ingridientID, ContainerID.None, currentTableScript) : 
+                !CheckPlacementData(handItemScript.itemType, IngridientID.None, handItemScript.containerScript.containerID, currentTableScript)
+                )
             {
                 return 0;
             }
-            switch (mainTableTypeCheck)
+            
+            switch (currentTableType)
             {
-                case TableType.Normal:
-                    return 1;
                 case TableType.Spawner:
-                    Debug.LogError("Spawner should have an item in it");
                     return 0;
                 case TableType.Trash:
-                    if (isThereAPlate)
+                    if (handItemScript.itemType == ItemType.Container)
                     {
-                        plate.ClearItems();
+                        handItemScript.containerScript.ClearItems();
                         return 0;
                     }
-                    return 1;
-                case TableType.PlayerInteraction:
-                    return 1;
-                case TableType.ToggleActivation:
-                    ToggleActivationTable toggleActivationTable = currentTableScript.GetComponent<ToggleActivationTable>();
-                    if (toggleActivationTable.tableIsActive)
-                    {
-                        Debug.Log("This Table is Closed/Active");
-                        return 0;
-                    }
-                    return 1;
-                case TableType.AlwaysActive:
-                    return 1;
-                case TableType.Delivery:
                     return 1;
             }
+            return 1;
         }
+    }
 
-        Debug.LogError("Should be inaccessable");
+    private int CanPlateThisItem(ItemManager handItemScript, MainTableScript currentTableScript)
+    {
+        //Is there a plate in hand
+        int isThereAContainer = 0;
+        // if = 0, No Containers
+        // if = 1, Hand Container
+        // if = 2, Table Container
+        // if = 3, Two Containers
+        ItemManager containerItem = null;
+        ItemManager toBePlatedItem = null;
+        if (handItemScript.itemType == ItemType.Container) //Is there a plate in hands
+        {
+            isThereAContainer += 1;
+        }
+        if (currentTableScript.tableItemScript.itemType == ItemType.Container) //Is there a plate on table
+        {
+            isThereAContainer += 2;
+        }
+        
+        switch (isThereAContainer)
+        {
+            case 0:
+            break;
+            case 1:
+                containerItem = handItemScript;
+                toBePlatedItem = currentTableScript.tableItemScript;
+            break;
+            case 2:
+                containerItem = currentTableScript.tableItemScript;
+                toBePlatedItem = handItemScript;
+            break;
+            case 3:
+            break;
+        }
+        
+        if (isThereAContainer is 1 or 2) //Test if we can move item from table into hand plate
+        {
+            if (containerItem.containerScript.CanAddItem(toBePlatedItem))
+            {
+                if (CheckPlacementData(ItemType.Container, IngridientID.None, containerItem.containerScript.containerID, currentTableScript))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+        }
         return 0;
     }
 
-    public bool CanIPlaceItemOnTable(ItemID checkItemID, TableType checkTableType)
+    public bool CheckPlacementData(ItemType itemType, IngridientID ingridientID, ContainerID containerID, MainTableScript checkMainTable)
     {
-        ItemData checkItem = itemDatabaseSO.GetItem(checkItemID);
-        switch (checkTableType)
+        PlacementData placementData = null;
+        switch (itemType)
+        {
+            case ItemType.Container:
+                placementData = masterManager.itemDatabaseSO.GetContainer(containerID).placementData;
+            break;
+            case ItemType.Ingridient:
+                placementData = masterManager.itemDatabaseSO.GetIngridient(ingridientID).placementData;
+            break;
+        }
+        switch (checkMainTable.tableType)
         {
             case TableType.Normal:
-                if (!checkItem.placementData.normalTable)
-                {
-                    Debug.Log(checkItemID + " can not be placed on " + checkTableType);
-                    return false;
-                }
-                return true;
+                return placementData.normalTable;
             case TableType.Spawner:
                 return false;
             case TableType.Trash:
-                if (!checkItem.placementData.binTable)
-                {
-                    //Debug.Log(checkItemID + " can not be placed on " + checkTableType);
-                    return false;
-                }
-                return true;
-            case TableType.PlayerInteraction:
-                if (!checkItem.placementData.playerInteractionTable)
-                {
-                    //Debug.Log(checkItemID + " can not be placed on " + checkTableType);
-                    return false;
-                }
-                return true;
-            case TableType.ToggleActivation:
-                if (!checkItem.placementData.toggleActivationTable)
-                {
-                    //Debug.Log(checkItemID + " not be placed on " + checkTableType);
-                    return false;
-                }
-                return true;
-            case TableType.AlwaysActive:
-                if (!checkItem.placementData.alwaysActiveTable)
-                {
-                    //Debug.Log(checkItemID + " can not be placed on " + checkTableType);
-                    return false;
-                }
-                return true;
+                return placementData.binTable;
             case TableType.Delivery:
-                if (!checkItem.placementData.deliveryTable)
-                {
-                    //Debug.Log(checkItemID + " can not be placed on " + checkTableType);
-                    return false;
-                }
-                return true;
+                return placementData.deliveryTable;
+            case TableType.Workbench:
+                return checkMainTable.workbenchScript.CheckPlacementDataWorkbench(placementData);
         }
         Debug.LogError("Something went wrong when checking placement validity");
         return false;
-    }
-
-    public ItemID CombinationRecipeCheck(Items firstItemScript, Items secondItemScript)
-    {
-        for (int i = 0; i < secondItemScript.itemData.combineData.Count; i++)
-        {
-            if (secondItemScript.itemData.combineData[i].item == firstItemScript.itemID)
-            {
-                //Debug.Log(secondItemScript.itemID + " 1+ " + firstItemScript.itemID + " = " + secondItemScript.itemData.combineData[i].result);
-                return secondItemScript.itemData.combineData[i].result;
-            }
-        }
-        for (int i = 0; i < firstItemScript.itemData.combineData.Count; i++)
-        {
-            if (firstItemScript.itemData.combineData[i].item == secondItemScript.itemID)
-            {
-                //Debug.Log(firstItemScript.itemID + " 2+ " + secondItemScript.itemID + " = " + firstItemScript.itemData.combineData[i].result);
-                return firstItemScript.itemData.combineData[i].result;
-            }
-        }
-        return ItemID.None;
     }
 }

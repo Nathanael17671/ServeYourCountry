@@ -1,10 +1,11 @@
-using Unity.Netcode;
 using UnityEngine;
 
-public class SpawnerTable : NetworkBehaviour
+public class SpawnerTable : MonoBehaviour
 {
     private MainTableScript mainTableScript;
-    [SerializeField] internal ItemID spawnItem;
+    [SerializeField] internal ItemType spawnItemType;
+    [SerializeField] internal IngridientID spawnIngridientID;
+    [SerializeField] internal ContainerID spawnContainerID;
     private GameObject spawnItemPrefab;
 
     void Awake()
@@ -13,29 +14,36 @@ public class SpawnerTable : NetworkBehaviour
     }
 
     void Start()
-    {
-        spawnItemPrefab = mainTableScript.masterManager.itemDatabaseSO.GetItem(spawnItem).Prefab;
+    {     
+        ItemDatabaseSO itemDatabaseSO = mainTableScript.masterManager.itemDatabaseSO;
+        switch (spawnItemType)
+        {
+            case ItemType.Container:
+                spawnItemPrefab = itemDatabaseSO.GetContainer(spawnContainerID).Prefab;
+            break;
+            case ItemType.Ingridient:
+                spawnItemPrefab = itemDatabaseSO.GetIngridient(spawnIngridientID).Prefab;
+            break;
+        }
         if (spawnItemPrefab == null)
         {
-
-            Debug.LogError("Error Source: SpawnerTable. Item in database is missing prefab OR spawnItem:" + spawnItem + " is incorrect");
+            Debug.LogError("Error Source: SpawnerTable. Item in database is missing prefab OR spawnItemType:" + spawnItemType + " / spawnIngridientID: " + spawnIngridientID + " / spawnContainerID: " + spawnContainerID + " is incorrect");
         }
         SpawnNewItem();
     }
 
-
     public void SpawnNewItem()
     {
         //Remove current Item
-        Destroy(mainTableScript.heldTableItem);
-        mainTableScript.heldTableItem = null;
-        mainTableScript.heldTableItemScript = null;
+        Destroy(mainTableScript.tableItemGameobject);
+        mainTableScript.tableItemGameobject = null;
+        mainTableScript.tableItemScript = null;
 
         //Create new Item
-        mainTableScript.heldTableItem = Instantiate(spawnItemPrefab, mainTableScript.itemHoldPoint.transform.position, Quaternion.identity);
-        mainTableScript.heldTableItem.transform.parent = mainTableScript.itemHoldPoint.transform;
-        mainTableScript.heldTableItemScript = mainTableScript.heldTableItem.GetComponent<Items>();
-        mainTableScript.heldTableItemScript.currentTableScript = mainTableScript;
+        mainTableScript.tableItemGameobject = Instantiate(spawnItemPrefab, mainTableScript.itemHoldPoint.transform.position, Quaternion.identity);
+        mainTableScript.tableItemGameobject.transform.parent = mainTableScript.itemHoldPoint.transform;
+        mainTableScript.tableItemScript = mainTableScript.tableItemGameobject.GetComponent<ItemManager>();
+        mainTableScript.tableItemScript.currentTableScript = mainTableScript;
     
     }
 

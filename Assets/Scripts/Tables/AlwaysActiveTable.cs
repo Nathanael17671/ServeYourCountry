@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AlwaysActiveTable : MonoBehaviour
@@ -11,15 +12,11 @@ public class AlwaysActiveTable : MonoBehaviour
 
     void Update()
     {
-        if (!mainTableScript.HasItemOnTable())
-        {
-            return;
-        }
+        if (!mainTableScript.HasItemOnTable()) return;
+        if (!mainTableScript.workbenchScript.hasValidRecipe) return;
+
+        mainTableScript.tableItemScript.currentTime += Time.deltaTime;
+        mainTableScript.tableItemScript.UpdateProgressBar(WorkbenchType.AlwaysActive); 
         
-        if (mainTableScript.heldTableItemScript.itemData.usedInAlwaysActiveTable)
-        {
-            mainTableScript.heldTableItemScript.currentAlwaysActiveTime += Time.deltaTime;
-            mainTableScript.heldTableItemScript.UpdateProgressBar(mainTableScript.mainTableType);
-        }
     }
 }

@@ -14,19 +14,19 @@ public class PlayerInteractionTable : MonoBehaviour
 
     public void ProssesItemProgress()
     {
+        if (!mainTableScript.workbenchScript.hasValidRecipe) return;
+        
         if (currentProgressCooldown <= 0)
         {
             currentProgressCooldown = progressCooldown;
-            mainTableScript.heldTableItemScript.currentPlayerInteractionTime += progressAmount;
-            mainTableScript.heldTableItemScript.UpdateProgressBar(mainTableScript.mainTableType);
+            mainTableScript.tableItemScript.currentTime += progressAmount;
+            mainTableScript.tableItemScript.UpdateProgressBar(WorkbenchType.PlayerInteraction);
         }
     }
 
     void Update()
     {
         if (currentProgressCooldown > 0)
-        {
             currentProgressCooldown -= Time.deltaTime;
-        }
     }
 }

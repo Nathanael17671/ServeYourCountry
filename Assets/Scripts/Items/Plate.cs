@@ -4,6 +4,7 @@ using Unity.Netcode;
 
 public class Plate : NetworkBehaviour
 {
+    /*/
     [SerializeField] public List<ItemID> itemTypeList;
     [SerializeField] private List<GameObject> itemGameobjectList;
 
@@ -31,7 +32,7 @@ public class Plate : NetworkBehaviour
         return !itemTypeList.Contains(newItemID);
     }
 
-    bool IsEmpty()
+    public bool IsEmpty()
     {
         if (itemTypeList.Count == 0) 
             return true;
@@ -99,5 +100,5 @@ public class Plate : NetworkBehaviour
         item.transform.localRotation = Quaternion.identity;
         item.transform.localScale = Vector3.one;
         
-    }
+    }/*/
 }

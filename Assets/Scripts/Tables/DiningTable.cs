@@ -6,17 +6,21 @@ using System.Linq;
 public class DiningTable : MonoBehaviour
 {
     private MainTableScript mainTableScript;
+    OrderDatabaseSO orderDatabaseSO;
     private OrderManager orderManager;
-    [SerializeField] private List<ItemID> customerOrder;
+    public SpriteRenderer spriteRenderer;
+    [SerializeField] private List<IngridientID> customerOrder;
+
     
     void Start()
     {
         mainTableScript = GetComponent<MainTableScript>();
         orderManager = mainTableScript.masterManager.orderManager;
         orderManager.AddTableToManager(this);
+        orderDatabaseSO = mainTableScript.masterManager.orderDatabaseSO;
     }
 
-    public bool MatchingOrder(List<ItemID> plateContents)
+    public bool MatchingOrder(List<IngridientID> plateContents)
     {
         if (!customerOrder.SequenceEqual(plateContents))
         {
@@ -30,6 +34,7 @@ public class DiningTable : MonoBehaviour
     public void OrderFulfilled(GameObject fullfilledItem)
     {
         StartCoroutine(FloatToSky(fullfilledItem));
+        NewOrder();
     }
 
     IEnumerator FloatToSky(GameObject floater)
@@ -51,9 +56,13 @@ public class DiningTable : MonoBehaviour
         customerOrder.Clear();
     }
 
-    public void NewOrder(OrderData orderData)
+    public void NewOrder()
     {
+        int randomOrder = Random.Range(0, orderDatabaseSO.orders.Count);
+        OrderData orderData = orderDatabaseSO.orders[randomOrder];
+
         ClearOrder();
+        spriteRenderer.sprite = orderData.sprite;
         for(int i = 0; i < orderData.ingridients.Count; i++)
         {
             customerOrder.Add(orderData.ingridients[i]);
